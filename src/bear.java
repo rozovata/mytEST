@@ -4,7 +4,7 @@ class bear {
     Image _image,_image1,_image2,_image3,_image4;
     int x, y;
 
-
+//bear
     bear(String s,String s1, String s2, String s3, String s4, int _x, int _y) {
         x = _x;
         y = _y;
