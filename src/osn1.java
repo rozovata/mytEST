@@ -8,6 +8,7 @@ import java.io.IOException;
 
 class osn1 extends JFrame implements KeyListener {
 
+
     public static void main(String[] args) {
         osn1 game = new osn1();
     }
