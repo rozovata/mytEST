@@ -1,9 +1,13 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 class botton{
-    Image _image;
+    BufferedImage _image;
     botton(String s) {
-        _image = Toolkit.getDefaultToolkit().createImage(s);
+        try {_image = ImageIO.read(new File(s)); }catch (IOException e) { }
     }
 
 }

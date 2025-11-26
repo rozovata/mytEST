@@ -1,13 +1,16 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class character {
-    Image _image;
+class character {
+    BufferedImage _image;
     int x, y;
-
 
     character(String s, int _x, int _y) {
         x = _x;
         y = _y;
-        _image = Toolkit.getDefaultToolkit().createImage(s);
+        try {_image = ImageIO.read(new File(s)); }catch (IOException e) { System.out.println("нет поля");}
     }
 }
