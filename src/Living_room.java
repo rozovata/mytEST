@@ -7,24 +7,41 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
-
+import java.util.Scanner;
 
 class Living_room extends JFrame  {
 
 
     public static void main(String[] args) throws IOException {
+        //System.out.println("  read my text file:  "+readFile.next());
+        number = readFile.next().charAt(0)-48;
+        System.out.println(number);
+
         Living_room game = new Living_room();
+
     }
 
-    public String [] sometext = new String[]{"1","2","3","4","5"};
-   // FileReader fileReader = new FileReader("test.txt");
 
-    public int minuteCounter=0;
+    public String [] sometext = new String[]{"1","2","3","4","5"};
+    static FileReader fileReader;
+
+    static {
+        try {
+            fileReader = new FileReader("test.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Scanner readFile = new Scanner(fileReader);
+    static int number;
+    public int minuteCounter=number;
 
     ActionListener al = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             try (FileWriter fileWriter = new FileWriter("test.txt");){//чтобы не закрывать поток
+                System.out.println(minuteCounter +"  " + sometext.length);
                 fileWriter.write(sometext[minuteCounter]);
                 fileWriter.flush();  // ← ПРИНУДИТЕЛЬНАЯ запись!
 
@@ -36,17 +53,14 @@ class Living_room extends JFrame  {
             {
                 minuteCounter++;
             }
-            System.out.println(1);
             if (minuteCounter == 4) {
                 minuteCounter = 0;
                 System.out.println("Начинаем новый цикл");
             }
-
         }
     };
 
-    Timer my_timer = new Timer(1000,al); //таймер через 10 секунд совершает действия в actionlistener
-
+    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
     character fon = new character("src/image/Living_room.png", 0, 0);
     bear bear = new bear("src/image/bear.png",
             "src/image/void.png",
