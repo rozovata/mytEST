@@ -101,11 +101,11 @@ class Living_room extends JFrame  {
 
     public void paint(Graphics g)
     {
-        Graphics2D test = bi.createGraphics();
+
         if (bi == null) {
             bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
-
+        Graphics2D test = bi.createGraphics();
 
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
         if (bear._image != null) test.drawImage(bear._image, bear.x, bear.y, this);
