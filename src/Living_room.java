@@ -137,6 +137,8 @@ class Living_room extends JFrame  {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
+
     BufferedImage  bi;
     public void paint(Graphics g)
     {
