@@ -11,6 +11,21 @@ class character {
     character(String s, int _x, int _y) {
         x = _x;
         y = _y;
-        try {_image = ImageIO.read(new File(s)); }catch (IOException e) { System.out.println("нет поля");}
+        try {
+            _image = ImageIO.read(new File(s));
+        } catch (IOException e) {
+            System.out.println("нет поля");
+        }
+
+    }
+
+    public boolean bam(Rectangle temp) {
+        Rectangle boarder = new Rectangle(x, y, _image.getWidth(), _image.getHeight());
+        if (boarder.intersects(temp)) {
+            System.out.println("boom!!!!!");
+            return true;
+        }
+        return false;
+
     }
 }
