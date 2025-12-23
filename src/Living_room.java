@@ -36,6 +36,7 @@ class Living_room extends JFrame {
     public int minuteCounter=number;
     Sleep sleep = new Sleep("src/image/void.png",0,0);
     Shower shower = new Shower("src/image/void.png",0,0);
+    Food food = new Food("src/image/void.png",0,0);
 
     ActionListener al = new ActionListener() {
         @Override
