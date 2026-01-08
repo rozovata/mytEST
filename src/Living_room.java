@@ -1,4 +1,4 @@
-import javax.imageio.ImageIO;
+/*import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -233,4 +233,4 @@ class Living_room extends JFrame {
     }
 
 
-}
+}*/

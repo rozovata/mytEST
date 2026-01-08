@@ -92,8 +92,6 @@ public class Birdgame extends JFrame{
 
 
     public static void main(String[] args) throws IOException {
-
-
         Birdgame t= new Birdgame();
     }
 }
