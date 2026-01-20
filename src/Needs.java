@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Needs {
     BufferedImage image;
-    private String filePath;
+    public String filePath;
     public String[] images;
     public int counter;
 
