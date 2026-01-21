@@ -1,10 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
@@ -104,6 +101,27 @@ class Bad_room extends JFrame {
         my_timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    ActionListener al1 = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ee) {
+            if (bad<=3)
+            {
+                try {bear._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                bad++;
+            }
+            else {
+                timerBad.stop();
+                try {
+                    bear._image = ImageIO.read(new File("src/image/void.png"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    };
+
+    Timer timerBad = new Timer(1000,al1);
+
 
     BufferedImage  bi;
     public void paint(Graphics g)
@@ -125,6 +143,45 @@ class Bad_room extends JFrame {
 
 
     }
+    int bad=0;
+    MouseListener ML = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent qwerty) {
+            if (qwerty.getX() >= 1550)
+            {
+                timerBad.start();
 
+
+            }
+            repaint();
+            bad=0;
+
+
+
+        }
+
+
+
+
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
 
 }

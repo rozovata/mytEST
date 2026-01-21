@@ -22,7 +22,6 @@ public class Needs {
     // Загружает значение из файла
     public int CounterFromFile() {
         File f = new File(filePath);
-        if (!f.exists()) return 0;
 
         try (Scanner s = new Scanner(f)) {
             if (s.hasNext()) {
@@ -54,7 +53,6 @@ public class Needs {
 
     //Все обновляет, увеличивая состояние
     public void next() throws IOException {
-        System.out.println(counter);
         if( counter>=4){
             counter=4;
         }

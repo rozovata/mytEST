@@ -6,12 +6,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
 
-class Living_room1 extends JFrame {
+class Bath_room extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        Living_room1 game = new Living_room1();
+        Bath_room game = new Bath_room();
     }
     // Инициализируем
     String[] sleepImages = {
@@ -80,7 +80,7 @@ class Living_room1 extends JFrame {
 
 
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
-     int bad=0;
+    int bad=0;
     ActionListener al1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ee) {
@@ -127,7 +127,7 @@ class Living_room1 extends JFrame {
     };
 
     Timer timerBad = new Timer(1000,al1);
-    character fon = new character("src/image/Bad_room.png", 0, 0);
+    character fon = new character("src/image/Bath_room.png", 0, 0);
     bear bear = new bear("src/image/bear.png",
             "src/image/void.png",
             "src/image/void.png",
@@ -163,7 +163,7 @@ class Living_room1 extends JFrame {
 
         }
     } ;
-    Living_room1() throws IOException {
+    Bath_room() throws IOException {
         setSize(1920,1080);
         setVisible(true);
         addKeyListener(KL);
