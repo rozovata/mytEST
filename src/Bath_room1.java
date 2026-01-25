@@ -4,14 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Scanner;
 
-class Bath_room extends JFrame {
+class Bath_room1 extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        Bath_room game = new Bath_room();
+        Bath_room1 game = new Bath_room1();
     }
     // Инициализируем
     String[] sleepImages = {
@@ -47,12 +46,14 @@ class Bath_room extends JFrame {
 
     Needs sleepNeeds = new Needs("test.txt", sleepImages);
     Needs showerNeeds = new Needs("test2.txt", showerImages);
-    Needs foodNeeds = new Needs("test.txt", foodImages );
+    Needs foodNeeds = new Needs("test1.txt", foodImages );
     Needs gameNeeds = new Needs("test3.txt", gameImages );
     Sleep sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
     Shower shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
     Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
     Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+    botton button_room_right = new botton("src/image/button_room_right.png");
+    botton button_room_left = new botton("src/image/button_room_left.png");
 
 
     ActionListener al = new ActionListener() {
@@ -60,16 +61,17 @@ class Bath_room extends JFrame {
         public void actionPerformed(ActionEvent ee) {
             try {
                 // Обновляем картинки в объектах
-                sleep._image = sleepNeeds.image;
-                shower._image = showerNeeds.image;
-                food._image = foodNeeds.image;
-                game._image = gameNeeds.image;
 
 
                 sleepNeeds.next();
                 showerNeeds.next();
                 foodNeeds.next();
                 gameNeeds.next();
+                sleep._image = sleepNeeds.image;
+                shower._image = showerNeeds.image;
+                food._image = foodNeeds.image;
+                game._image = gameNeeds.image;
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -80,43 +82,51 @@ class Bath_room extends JFrame {
 
 
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
-    int bad=0;
+    int bath=0;
     ActionListener al1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ee) {
-            if (bad<=3 && bad!=0)
+            if (bath<=3 && bath!=0)
             {
 
-                try {bear._image = ImageIO.read(new File("src/image/bearbad.png")); }catch (IOException e) { }
-                bad++;
+                try {Bear._image = ImageIO.read(new File("src/image/bearbath.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+
+                bath++;
                 try (FileWriter fileWriter = new FileWriter(sleepNeeds.filePath)){
-                    if (sleepNeeds.counter>0)
+                    if (showerNeeds.counter>0)
                     {
-                        sleepNeeds.counter--;
+                        showerNeeds.counter--;
                     }
-                    fileWriter.write(String.valueOf(sleepNeeds.counter));
+                    fileWriter.write(String.valueOf(showerNeeds.counter));
                     fileWriter.flush();
-                    System.out.println("Файл записан: " + sleepNeeds.filePath + " значение: " + (sleepNeeds.counter));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 try {
-                    sleepNeeds.updateImage();
+                    showerNeeds.updateImage();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                sleep._image = sleepNeeds.image;
+                shower._image = showerNeeds.image;
                 repaint();
 
-                if (!timerBad.isRunning()) { // ← ЗАПУСКАЕМ ТАЙМЕР
-                    timerBad.start();
+                if (!timerbath.isRunning()) { // ← ЗАПУСКАЕМ ТАЙМЕР
+                    timerbath.start();
                 }
             }
             else {
-                timerBad.stop();
-                bad =0;
+                timerbath.stop();
+                bath =0;
                 try {
-                    bear._image = ImageIO.read(new File("src/image/bear.png"));
+                    Bear._image = ImageIO.read(new File("src/image/bear.png"));
+                    Bear._image1 = ImageIO.read(new File(bear.head()));
+                    Bear._image2 = ImageIO.read(new File(bear.top()));
+                    Bear._image3 = ImageIO.read(new File(bear.trousers()));
+                    Bear._image4 = ImageIO.read(new File(bear.boots()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -126,15 +136,14 @@ class Bath_room extends JFrame {
         }
     };
 
-    Timer timerBad = new Timer(1000,al1);
+    Timer timerbath = new Timer(1000,al1);
     character fon = new character("src/image/Bath_room.png", 0, 0);
-    bear bear = new bear("src/image/bear.png",
-            "src/image/void.png",
-            "src/image/void.png",
-            "src/image/void.png",
-            "src/image/void.png",
+    bear Bear = new bear("src/image/bear.png",
+            bear.head(),
+            bear.top(),
+            bear.trousers(),
+            bear.boots(),
             0, 0);
-
 
 
     KeyListener KL = new KeyListener() {
@@ -146,10 +155,10 @@ class Bath_room extends JFrame {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_LEFT) {
-                bear.x -= 2;
+                Bear.x -= 2;
             }
             if (key == KeyEvent.VK_RIGHT) {
-                bear.x += 2;
+                Bear.x += 2;
             }
             if (key == KeyEvent.VK_SPACE) {
                 System.out.println("Ты нажал на мишку");
@@ -163,7 +172,7 @@ class Bath_room extends JFrame {
 
         }
     } ;
-    Bath_room() throws IOException {
+    Bath_room1() throws IOException {
         setSize(1920,1080);
         setVisible(true);
         addKeyListener(KL);
@@ -184,11 +193,17 @@ class Bath_room extends JFrame {
 
 
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
-        if (bear._image != null) test.drawImage(bear._image, bear.x, bear.y, this);
+        if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
         if (sleep._image != null) test.drawImage(sleep._image, sleep.x, sleep.y, this);
         if (shower._image != null) test.drawImage(shower._image, shower.x, shower.y, this);
         if (food._image != null) test.drawImage(food._image, food.x, food.y, this);
         if (game._image != null) test.drawImage(game._image, game.x, game.y, this);
+        if (Bear._image1 != null) test.drawImage(Bear._image1, Bear.x, Bear.y, this);
+        if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
+        if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
+        if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
+        if (button_room_right._image != null) test.drawImage(button_room_right._image, 0,0,this);
+        if (button_room_left._image != null) test.drawImage(button_room_left._image, 0,0,this);
 
 
 
@@ -200,23 +215,19 @@ class Bath_room extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            System.out.println("=== МЫШЬ КЛИКНУТА ===");
-            System.out.println("Координаты: X=" + qwerty.getX() + " Y=" + qwerty.getY());
-
-            if (qwerty.getX() >= 900 && qwerty.getX() <= 1900 && qwerty.getY() >= 412 && qwerty.getY() <= 840) {
-                System.out.println("ПОПАДАНИЕ В ОБЛАСТЬ!");
-                bad += 1;
-                System.out.println("bad увеличен до: " + bad);
-
-                if (!timerBad.isRunning()) {
-                    System.out.println("Запускаем timerBad...");
-                    timerBad.start();
-                } else {
-                    System.out.println("timerBad уже работает");
+            if (qwerty.getX() >= 0 && qwerty.getX() <= 950 && qwerty.getY() >= 500 && qwerty.getY() <= 1080) {
+                bath += 1;
+                if (!timerbath.isRunning()) {
+                    timerbath.start();
                 }
-            } else {
-                System.out.println("МИМО области!");
             }
+            if (qwerty.getX() >= 1130 && qwerty.getX() <= 1385 && qwerty.getY() >= 245 && qwerty.getY() <= 600) {
+                dispose();//закрывает окно
+                new osn1();
+
+            }
+
+
             repaint();
         }
 

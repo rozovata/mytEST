@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 class osn1 extends JFrame implements KeyListener {
@@ -16,11 +17,11 @@ class osn1 extends JFrame implements KeyListener {
 
     //Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Tom/Documents/Школа/fon1.png");
     character no = new character("src/image/no.png", 0, 0);
-    bear bear = new bear("src/image/bear.png",
-            "src/image/void.png",
-            "src/image/void.png",
-            "src/image/void.png",
-            "src/image/void.png",
+    bear Bear = new bear("src/image/Bear.png",
+            bear.head(),
+            bear.top(),
+            bear.trousers(),
+            bear.boots(),
             0, 0);
     character yes = new character("src/image/yes.png", 0, 0);
     character panel = new character("src/image/panel1.png", 0, 0);
@@ -35,6 +36,7 @@ class osn1 extends JFrame implements KeyListener {
     botton hat2 = new botton("src/image/hat2.png");
     botton bottom = new botton("src/image/bottom.png");
     botton shoes = new botton("src/image/shoes.png");
+    botton to_return = new botton("src/image/to_return.png");
 
     int i=1;
     int p=1;
@@ -64,17 +66,19 @@ class osn1 extends JFrame implements KeyListener {
         test.setColor(Color.WHITE);
         test.fillRect(0, 0, getWidth(), getHeight());
 
+
         // Рисуем все картинки с проверками
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
-        if (bear._image != null) test.drawImage(bear._image, bear.x, bear.y, this);
-        if (bear._image1 != null) test.drawImage(bear._image1, bear.x, bear.y, this);
-        if (bear._image2 != null) test.drawImage(bear._image2, bear.x, bear.y, this);
-        if (bear._image3 != null) test.drawImage(bear._image3, bear.x, bear.y, this);
-        if (bear._image4 != null) test.drawImage(bear._image4, bear.x, bear.y, this);
+        if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
+        if (Bear._image1 != null) test.drawImage(Bear._image1, Bear.x, Bear.y, this);
+        if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
+        if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
+        if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
         if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
         if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
         if (panel._image != null) test.drawImage(panel._image, panel.x, panel.y, this);
         if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
+        if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
 
         if (pole._image != null) {
             test.drawImage(pole._image, 0, 0, this);
@@ -145,10 +149,10 @@ class osn1 extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_LEFT) {
-            bear.x -= 2;
+            Bear.x -= 2;
         }
         if (key == KeyEvent.VK_RIGHT) {
-            bear.x += 2;
+            Bear.x += 2;
         }
         if (key == KeyEvent.VK_SPACE) {
             System.out.println("Ты нажал на мишку");
@@ -215,73 +219,100 @@ class osn1 extends JFrame implements KeyListener {
             repaint(1495,800,60,100);
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==2 )
             {
-                try {bear._image1 = ImageIO.read(new File("src/image/top.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(new File("src/image/top.png")); }catch (IOException e) { }
+                SaveFile(2,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==3 )
             {
-                try {bear._image1 = ImageIO.read(new File("src/image/top2.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(new File("src/image/top2.png")); }catch (IOException e) { }
+                SaveFile(3,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==1 )
             {
-                try {bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                SaveFile(1,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==2 )
             {
-                try {bear._image2 = ImageIO.read(new File("src/image/head1.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(new File("src/image/head1.png")); }catch (IOException e) { }
+                SaveFile(2,"head.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==3 )
             {
-                try {bear._image2 = ImageIO.read(new File("src/image/head2.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(new File("src/image/head2.png")); }catch (IOException e) { }
+                SaveFile(3,"head.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==4 )
             {
-                try {bear._image2 = ImageIO.read(new File("src/image/head.png")); }catch (IOException e) { }
-
+                try {Bear._image2 = ImageIO.read(new File("src/image/head.png")); }catch (IOException e) { }
+                SaveFile(4,"head.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==1 )
             {
-                try {bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-
+                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                SaveFile(1,"head.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 583 && qwerty.getY()<= (583+165) && l==2 )
             {
-                try {bear._image3 = ImageIO.read(new File("src/image/trousers.png")); }catch (IOException e) { }
-
+                try {Bear._image3 = ImageIO.read(new File("src/image/trousers.png")); }catch (IOException e) { }
+                SaveFile(2,"trousers.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 583 && qwerty.getY()<= (583+165) && l==1 )
             {
-                try {bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-
+                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                SaveFile(1,"trousers.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 783 && qwerty.getY()<= (783+165) && m==2 )
             {
-                try {bear._image4 = ImageIO.read(new File("src/image/boots.png")); }catch (IOException e) { }
-
+                try {Bear._image4 = ImageIO.read(new File("src/image/boots.png")); }catch (IOException e) { }
+                SaveFile(2,"boots.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 783 && qwerty.getY()<= (783+165) && m==1 )
             {
-                try {bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-
+                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                SaveFile(1,"boots.txt");
             }
             repaint();
-
-
-
+            if(m==1)
+            {
+                SaveFile(1,"boots.txt");
+            }
+            if(p==1)
+            {
+                SaveFile(1,"head.txt");
+            }
+            if(i==1)
+            {
+                SaveFile(1,"top.txt");
+            }
+            if(l==1)
+            {
+                SaveFile(1,"trousers.txt");
+            }
+            if(qwerty.getX() >= 623 && qwerty.getX()<= 977 && qwerty.getY() >= 27 && qwerty.getY()<= 153 )
+            {
+                dispose();//закрывает окно
+                try {
+                    new Bath_room1();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
 
 
@@ -307,4 +338,12 @@ class osn1 extends JFrame implements KeyListener {
 
         }
     };
+    public static void SaveFile(int counter, String filePath) {
+        try (FileWriter fileWriter = new FileWriter(filePath);) {//чтобы не закрывать поток
+            fileWriter.write(String.valueOf(counter));//запишет не символ по номеру, а сам текст
+            fileWriter.flush();  // ← ПРИНУДИТЕЛЬНАЯ запись!
+        } catch (IOException a) {
+            throw new RuntimeException(a);
+        }
+    }
 }

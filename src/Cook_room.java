@@ -4,14 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Scanner;
 
-class Living_room1 extends JFrame {
+class Cook_room extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        Living_room1 game = new Living_room1();
+        Cook_room game = new Cook_room();
     }
     // Инициализируем
     String[] sleepImages = {
@@ -44,7 +43,9 @@ class Living_room1 extends JFrame {
             "src/image/game5.png"
     };
 
-
+    botton cake = new botton("src/image/cake.png");
+    botton tea = new botton("src/image/tea.png");
+    botton hot_dog = new botton("src/image/hot_dog.png");
     Needs sleepNeeds = new Needs("test.txt", sleepImages);
     Needs showerNeeds = new Needs("test2.txt", showerImages);
     Needs foodNeeds = new Needs("test1.txt", foodImages );
@@ -54,6 +55,7 @@ class Living_room1 extends JFrame {
     Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
     Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
 
+    static int meal = 1;
 
     ActionListener al = new ActionListener() {
         @Override
@@ -80,71 +82,17 @@ class Living_room1 extends JFrame {
     };
 
 
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
-     int bad=0;
-    ActionListener al1 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (bad<=3 && bad!=0)
-            {
-
-                try {Bear._image = ImageIO.read(new File("src/image/Bearbad.png")); }catch (IOException e) { }
-                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                bad++;
-                try (FileWriter fileWriter = new FileWriter(sleepNeeds.filePath)){
-                    if (sleepNeeds.counter>0)
-                    {
-                        sleepNeeds.counter--;
-                    }
-                    fileWriter.write(String.valueOf(sleepNeeds.counter));
-                    fileWriter.flush();
-                    System.out.println("Файл записан: " + sleepNeeds.filePath + " значение: " + (sleepNeeds.counter));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    sleepNeeds.updateImage();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                sleep._image = sleepNeeds.image;
-                repaint();
-
-                if (!timerBad.isRunning()) { // ← ЗАПУСКАЕМ ТАЙМЕР
-                    timerBad.start();
-                }
-            }
-            else {
-                timerBad.stop();
-                bad =0;
-                try {
-                    Bear._image = ImageIO.read(new File("src/image/Bear.png"));
-                    Bear._image1 = ImageIO.read(new File(bear.head()));
-                    Bear._image2 = ImageIO.read(new File(bear.top()));
-                    Bear._image3 = ImageIO.read(new File(bear.trousers()));
-                    Bear._image4 = ImageIO.read(new File(bear.boots()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            repaint();
-
-        }
-    };
-
-    Timer timerBad = new Timer(1000,al1);
-    character fon = new character("src/image/Bad_room.png", 0, 0);
-    bear Bear = new bear("src/image/bear.png",
+    Timer my_timer = new Timer(10000,al); //таймер через 100 секунд совершает действия в actionlistener
+    character fon = new character("src/image/Cook_room.png", 0, 0);
+    character fon1 = new character("src/image/desk.png", 0, 0);
+    bear Bear = new bear("src/image/bearcook.png",
             bear.head(),
             bear.top(),
-            bear.trousers(),
-            bear.boots(),
+            "src/image/void.png",
+            "src/image/void.png",
             0, 0);
-
-
+    botton arrowright = new botton("src/image/arrowright.png");
+    botton arrowleft = new botton("src/image/arrowleft.png");
 
     KeyListener KL = new KeyListener() {
         @Override
@@ -172,7 +120,7 @@ class Living_room1 extends JFrame {
 
         }
     } ;
-    Living_room1() throws IOException {
+    Cook_room() throws IOException {
         setSize(1920,1080);
         setVisible(true);
         addKeyListener(KL);
@@ -198,10 +146,23 @@ class Living_room1 extends JFrame {
         if (shower._image != null) test.drawImage(shower._image, shower.x, shower.y, this);
         if (food._image != null) test.drawImage(food._image, food.x, food.y, this);
         if (game._image != null) test.drawImage(game._image, game.x, game.y, this);
-        if (Bear._image1 != null) test.drawImage(Bear._image1, Bear.x, Bear.y, this);
-        if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
-        if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
-        if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
+        if (Bear._image1 != null) test.drawImage(Bear._image1, 295-620,340-230, this);
+        if (Bear._image2 != null) test.drawImage(Bear._image2,400-767,694-565, this);
+        if (fon1._image != null) test.drawImage(fon1._image, fon1.x, fon1.y, this);
+        if ( meal== 2 && cake._image != null) {
+            test.drawImage(cake._image, 0, 0, this);
+        }
+        if ( meal== 3 && tea._image != null) {
+            test.drawImage(tea._image, 0, 0, this);
+        }
+        if ( meal == 4 && hot_dog._image != null) {
+            test.drawImage(hot_dog._image, 0, 0, this);
+        }
+        if (meal> 4 || meal < 1) {
+            meal = 1;
+        }
+        if (arrowright._image != null) test.drawImage(arrowright._image, 0,0, this);
+        if (arrowleft._image != null) test.drawImage(arrowleft._image, 0,0,this);
 
 
         g.drawImage(bi,0,0,this);
@@ -211,24 +172,43 @@ class Living_room1 extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            //System.out.println("=== МЫШЬ КЛИКНУТА ===");
-            //System.out.println("Координаты: X=" + qwerty.getX() + " Y=" + qwerty.getY());
+            if (qwerty.getX() >= 1280 && qwerty.getX()<= 1371 && qwerty.getY() >= 875 && qwerty.getY()<= 1020 )
+            {
+                meal+=1;
 
-            if (qwerty.getX() >= 900 && qwerty.getX() <= 1900 && qwerty.getY() >= 412 && qwerty.getY() <= 840) {
-                //System.out.println("ПОПАДАНИЕ В ОБЛАСТЬ!");
-                bad += 1;
-                //System.out.println("bad увеличен до: " + bad);
-
-                if (!timerBad.isRunning()) {
-                    //System.out.println("Запускаем timerBad...");
-                    timerBad.start();
-                } else {
-                    //System.out.println("timerBad уже работает");
-                }
-            } else {
-                //System.out.println("МИМО области!");
             }
             repaint();
+            if (qwerty.getX() >= 12 && qwerty.getX()<= 625 && qwerty.getY() >= 875 && qwerty.getY()<= 1020 )
+            {
+                meal-=1;
+
+            }
+            repaint();
+            if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==2 )
+            {
+                try {cake._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                foodNeeds.counter= foodNeeds.counter-3;
+                osn1.SaveFile(foodNeeds.counter,"test1.txt");
+
+            }
+            repaint();
+            if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==3 )
+            {
+                try {tea._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                foodNeeds.counter= foodNeeds.counter-1;
+                osn1.SaveFile(foodNeeds.counter,"test1.txt");
+
+            }
+            repaint();
+            if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==4 )
+            {
+                try {hot_dog._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                foodNeeds.counter= foodNeeds.counter-2;
+                osn1.SaveFile(foodNeeds.counter,"test1.txt");
+
+            }
+            repaint();
+
         }
 
 
