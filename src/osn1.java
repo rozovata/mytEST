@@ -18,8 +18,8 @@ class osn1 extends JFrame implements KeyListener {
     //Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Tom/Documents/Школа/fon1.png");
     character no = new character("src/image/no.png", 0, 0);
     bear Bear = new bear("src/image/Bear.png",
-            bear.head(),
             bear.top(),
+            bear.head(),
             bear.trousers(),
             bear.boots(),
             0, 0);

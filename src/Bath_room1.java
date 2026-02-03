@@ -52,8 +52,8 @@ class Bath_room1 extends JFrame {
     Shower shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
     Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
     Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
-    botton button_room_right = new botton("src/image/button_room_right.png");
-    botton button_room_left = new botton("src/image/button_room_left.png");
+    botton arrow_room_right = new botton("src/image/arrow_room_right.png");
+    botton arrow_room_left = new botton("src/image/arrow_room_left.png");
 
 
     ActionListener al = new ActionListener() {
@@ -202,8 +202,8 @@ class Bath_room1 extends JFrame {
         if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
         if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
-        if (button_room_right._image != null) test.drawImage(button_room_right._image, 0,0,this);
-        if (button_room_left._image != null) test.drawImage(button_room_left._image, 0,0,this);
+        if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
+        if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
 
 
 
@@ -226,9 +226,29 @@ class Bath_room1 extends JFrame {
                 new osn1();
 
             }
-
-
             repaint();
+            boolean n = false;
+            if (qwerty.getX() >= 25 && qwerty.getX() <= 171 && qwerty.getY() >= 500 && qwerty.getY() <= 683)
+            {
+                try {
+                    Rooms.room_next(n);
+                    Rooms.class_room();
+                    dispose();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (qwerty.getX() >= 1750 && qwerty.getX() <= 1893 && qwerty.getY() >= 500 && qwerty.getY() <= 683)
+            {
+                n=true;
+                try {
+                    Rooms.room_next(n);
+                    Rooms.class_room();
+                    dispose();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
 
 
