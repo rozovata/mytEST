@@ -237,8 +237,10 @@ class Living_room1 extends JFrame {
             {
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    timerBad.stop();
+                    my_timer.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -248,8 +250,10 @@ class Living_room1 extends JFrame {
                 n=true;
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    timerBad.stop();
+                    my_timer.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

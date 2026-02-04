@@ -96,7 +96,7 @@ class Bath_room1 extends JFrame {
                 try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
 
                 bath++;
-                try (FileWriter fileWriter = new FileWriter(sleepNeeds.filePath)){
+                try (FileWriter fileWriter = new FileWriter(showerNeeds.filePath)){
                     if (showerNeeds.counter>0)
                     {
                         showerNeeds.counter--;
@@ -232,8 +232,10 @@ class Bath_room1 extends JFrame {
             {
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    my_timer.stop();
+                    timerbath.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -243,8 +245,10 @@ class Bath_room1 extends JFrame {
                 n=true;
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    my_timer.stop();
+                    timerbath.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -161,8 +161,9 @@ class Game_room extends JFrame {
             {
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    my_timer.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -172,8 +173,9 @@ class Game_room extends JFrame {
                 n=true;
                 try {
                     Rooms.room_next(n);
-                    Rooms.class_room();
+                    my_timer.stop();
                     dispose();
+                    Rooms.class_room();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
