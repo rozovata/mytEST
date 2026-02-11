@@ -54,6 +54,7 @@ class Game_room extends JFrame {
     Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
+    botton play_button = new botton("src/image/play_button.png");
 
 
     ActionListener al = new ActionListener() {
@@ -145,6 +146,7 @@ class Game_room extends JFrame {
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
+        if (play_button != null) test.drawImage(play_button._image, 0,0,this);
 
 
 
@@ -176,6 +178,15 @@ class Game_room extends JFrame {
                     my_timer.stop();
                     dispose();
                     Rooms.class_room();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 800 && qwerty.getY() <= 1015)
+            {
+                try {
+                    dispose();
+                    new Game_fly();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

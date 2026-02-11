@@ -260,5 +260,3 @@ class Cook_room extends JFrame {
         }
     };
 }
-
-
