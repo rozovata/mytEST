@@ -12,6 +12,8 @@ class Living_room1 extends JFrame {
     public static void main(String[] args) throws IOException {
 
         Living_room1 game = new Living_room1();
+        int duration = Time.Duration2();
+
     }
     // Инициализируем
     String[] sleepImages = {
