@@ -48,13 +48,49 @@ public class Time {
         Time.SaveTime(now);
         // Вычисляем разницу
         Duration duration = Duration.between(end, now);
-        return Math.toIntExact(duration.toMinutes());//вернет сколько часов прошло
+        return Math.toIntExact(duration.toMinutes());//вернет сколько минут прошло
     }
-   /* public static void NeedsTime(Needs need) throws FileNotFoundException {
+    public static void NeedsTime(Needs need) throws FileNotFoundException {
         int duration = Time.Duration2();
         int t = need.CounterFromFile();
-        if(t==4)
-            return;
+        int y=0;
+        if (duration>=12)
+        {
+            while (t!=4 && y!=4)
+            {
+                y++;
+                t++;
+            }
+        }
+        if (duration>=8 && duration<12 )
+        {
+            y=0;
+            while (t!=4 && y!=3)
+            {
+                y++;
+                t++;
+            }
+        }
+        if (duration>=4 && duration<8 )
+        {
+            y=0;
+            while (t!=4 && y!=2)
+            {
+                y++;
+                t++;
+            }
+        }
+        if (duration>=0 && duration<4 )
+        {
+            y=0;
+            while (t!=4 && y!=2)
+            {
+                y++;
+                t++;
+            }
+        }
+        Needs.CounteSaveFile2(t,need.filePath);
+        need.counter=t;
 
-    }*/
+    }
 }

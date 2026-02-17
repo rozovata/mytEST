@@ -11,12 +11,15 @@ class Living_room1 extends JFrame {
 
     public static void main(String[] args) throws IOException {
 
+        Time.NeedsTime(sleepNeeds);
+        Time.NeedsTime(showerNeeds);
+        Time.NeedsTime(foodNeeds);
+        Time.NeedsTime(gameNeeds);
         Living_room1 game = new Living_room1();
-        int duration = Time.Duration2();
 
     }
     // Инициализируем
-    String[] sleepImages = {
+    static String[] sleepImages = {
             "src/image/sleep1.png",
             "src/image/sleep2.png",
             "src/image/sleep3.png",
@@ -24,21 +27,21 @@ class Living_room1 extends JFrame {
             "src/image/sleep5.png"
     };
 
-    String[] showerImages = {
+    static String[] showerImages = {
             "src/image/shower1.png",
             "src/image/shower2.png",
             "src/image/shower3.png",
             "src/image/shower4.png",
             "src/image/shower5.png"
     };
-    String [] foodImages = {
+    static String [] foodImages = {
             "src/image/food1.png",
             "src/image/food2.png",
             "src/image/food3.png",
             "src/image/food4.png",
             "src/image/food5.png"
     };
-    String [] gameImages = {
+    static String [] gameImages = {
             "src/image/game1.png",
             "src/image/game2.png",
             "src/image/game3.png",
@@ -47,10 +50,22 @@ class Living_room1 extends JFrame {
     };
 
 
-    Needs sleepNeeds = new Needs("test.txt", sleepImages);
-    Needs showerNeeds = new Needs("test2.txt", showerImages);
-    Needs foodNeeds = new Needs("test1.txt", foodImages );
-    Needs gameNeeds = new Needs("test3.txt", gameImages );
+    static Needs sleepNeeds;
+    static Needs showerNeeds;
+    static Needs foodNeeds;
+    static Needs gameNeeds;
+
+    static {
+        try {
+            sleepNeeds = new Needs("test.txt", sleepImages);
+            showerNeeds = new Needs("test2.txt", showerImages);
+            foodNeeds = new Needs("test1.txt", foodImages );
+            gameNeeds = new Needs("test3.txt", gameImages );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     Sleep sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
     Shower shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
     Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
@@ -63,9 +78,6 @@ class Living_room1 extends JFrame {
         public void actionPerformed(ActionEvent ee) {
             try {
                 // Обновляем картинки в объектах
-
-
-
                 sleepNeeds.next();
                 showerNeeds.next();
                 foodNeeds.next();

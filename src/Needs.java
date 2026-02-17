@@ -43,6 +43,14 @@ public class Needs {
             throw new RuntimeException(a);
         }
     }
+    public static void CounteSaveFile2(int count, String filePath) {
+        try (FileWriter fileWriter = new FileWriter(filePath);) {//чтобы не закрывать поток
+            fileWriter.write(String.valueOf(count));//запишет не символ по номеру, а сам текст
+            fileWriter.flush();
+        } catch (IOException a) {
+            throw new RuntimeException(a);
+        }
+    }
 
     //Загружает картинку для текущего состояния
     public void updateImage() throws IOException {
