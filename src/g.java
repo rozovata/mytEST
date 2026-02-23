@@ -79,10 +79,10 @@ public class g extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
 
-        fon = Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/5438484227139173417.jpg");
-        save = Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/save.png");
-        sitting = Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/sitting.png");
-        sit = Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/sitting.png");
+        fon = Toolkit.getDefaultToolkit().createImage("src/image/fon_start.png");
+        save = Toolkit.getDefaultToolkit().createImage("src/image/setting3.png");
+        sitting = Toolkit.getDefaultToolkit().createImage("src/image/quit.png");
+        sit = Toolkit.getDefaultToolkit().createImage("src/image/save.png");
     }
 
     public void paint(Graphics g)

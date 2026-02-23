@@ -93,4 +93,25 @@ public class Time {
         need.counter=t;
 
     }
+    public static void NeedsTime2(Needs need) throws FileNotFoundException {
+        int duration = Time.Duration2();
+        int t = need.CounterFromFile();
+        int y=0;
+        if (duration>=1)
+        {
+
+        }
+        if ( duration<1 )
+        {
+            y=0;
+            while (t!=4 && y!=2)
+            {
+                y++;
+                t++;
+            }
+        }
+        Needs.CounteSaveFile2(t,need.filePath);
+        need.counter=t;
+
+    }
 }

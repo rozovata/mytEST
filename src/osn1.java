@@ -288,7 +288,7 @@ class osn1 extends JFrame implements KeyListener {
                 SaveFile(1,"boots.txt");
             }
             repaint();
-            if(m==1)
+           /* if(m==1)
             {
                 SaveFile(1,"boots.txt");
             }
@@ -303,7 +303,7 @@ class osn1 extends JFrame implements KeyListener {
             if(l==1)
             {
                 SaveFile(1,"trousers.txt");
-            }
+            }*/
             if(qwerty.getX() >= 623 && qwerty.getX()<= 977 && qwerty.getY() >= 27 && qwerty.getY()<= 153 )
             {
                 dispose();//закрывает окно
