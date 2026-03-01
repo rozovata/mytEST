@@ -78,7 +78,6 @@ class Game_fly extends JFrame {
             200, 650);
     Blocks blocks_1 = new Blocks("src/image/stone2.png","src/image/stone2.png","src/image/stone2.png",0,250,800);
     Player player = new Player (Bear.x ,Bear.y,Bear._image);
-    //character white_heart = new character("src/image/white_heart.png", 0, 0);
     character red_heart1  = new character("src/image/red_heart.png", 0, 0);
     character red_heart2  = new character("src/image/red_heart.png", 0, 0);
     character red_heart3  = new character("src/image/red_heart.png", 0, 0);
@@ -93,24 +92,24 @@ class Game_fly extends JFrame {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_LEFT) {
-                Bear.x -= 10;
-                player.x -= 10;
+                Bear.x -= 5;
+                player.x -= 5;
 
             }
             if (key == KeyEvent.VK_RIGHT) {
-                Bear.x += 10;
-                player.x += 10;
+                Bear.x += 5;
+                player.x += 5;
             }
             if (key == KeyEvent.VK_SPACE) {
                 System.out.println("Ты нажал на мишку");
             }
             if (key == KeyEvent.VK_UP) {
-                Bear.y -= 10;
-                player.y -= 10;
+                Bear.y -= 5;
+                player.y -= 5;
             }
             if (key == KeyEvent.VK_DOWN) {
-                Bear.y += 10;
-                player.y += 10;
+                Bear.y += 5;
+                player.y += 5;
             }
             repaint();
         }
@@ -139,19 +138,18 @@ class Game_fly extends JFrame {
         // Отрисовка рамок
         Graphics2D g2d = (Graphics2D) g;
 
-        // Рамка игрока - КРАСНАЯ
-        g2d.setColor(Color.RED);
-        g2d.drawRect(player.x + 40, player.y + 40,
-                player.image.getWidth() - 80, player.image.getHeight() - 80);
 
-        // Рамки камней - СИНИЕ
+        g2d.setColor(Color.RED);
+        g2d.drawRect(player.x , player.y ,
+                player.image.getWidth() - 10, player.image.getHeight() - 10);
+
         g2d.setColor(Color.BLUE);
-        g2d.drawRect(blocks_1.x + 60, blocks_1.y1 + 60,
-                blocks_1.image1.getWidth() - 120, blocks_1.image1.getHeight() - 120);
-        g2d.drawRect(blocks_1.x + 60, blocks_1.y2 + 60,
-                blocks_1.image2.getWidth() - 120, blocks_1.image2.getHeight() - 120);
-        g2d.drawRect(blocks_1.x + 60, blocks_1.y3 + 60,
-                blocks_1.image3.getWidth() - 120, blocks_1.image3.getHeight() - 120);
+        g2d.drawRect(blocks_1.x , blocks_1.y1,
+                blocks_1.image1.getWidth() - 10, blocks_1.image1.getHeight() - 10);
+        g2d.drawRect(blocks_1.x , blocks_1.y2 ,
+                blocks_1.image2.getWidth() - 10, blocks_1.image2.getHeight() - 10);
+        g2d.drawRect(blocks_1.x , blocks_1.y3,
+                blocks_1.image3.getWidth() - 10, blocks_1.image3.getHeight() - 10);
         if (bi == null) {
             bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
@@ -172,17 +170,20 @@ class Game_fly extends JFrame {
 
 
     }
-    static int bam=0;
+    static int bam = 0;
+    static boolean wasCl = false;
     Random inn = new Random();
     ActionListener al1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Rectangle bl1= new Rectangle(blocks_1.x, blocks_1.y1,blocks_1.image1.getWidth(),blocks_1.image1.getHeight());
-            Rectangle bl2= new Rectangle(blocks_1.x, blocks_1.y2,blocks_1.image2.getWidth(),blocks_1.image2.getHeight());
-            Rectangle bl3= new Rectangle(blocks_1.x, blocks_1.y3,blocks_1.image3.getWidth(),blocks_1.image3.getHeight());
-            if(player.bam(bl1) || player.bam(bl2) || player.bam(bl3) )
+            Rectangle bl1= new Rectangle(blocks_1.x, blocks_1.y1,blocks_1.image1.getWidth()-10,blocks_1.image1.getHeight()-10);
+            Rectangle bl2= new Rectangle(blocks_1.x, blocks_1.y2,blocks_1.image2.getWidth()-10,blocks_1.image2.getHeight()-10);
+            Rectangle bl3= new Rectangle(blocks_1.x, blocks_1.y3,blocks_1.image3.getWidth()-10,blocks_1.image3.getHeight()-10);
+            boolean isCl = player.bam(bl1) || player.bam(bl2) || player.bam(bl3);
+            if( isCl && !wasCl )
             {
                 bam++;
+                System.out.println("попадение");
                 if (bam==1){
                     try {
                         red_heart1._image=ImageIO.read(new File("src/image/white_heart.png"));
@@ -190,21 +191,19 @@ class Game_fly extends JFrame {
                         throw new RuntimeException(ex);
                     }
                 }
-                if (bam==2){
+                else if (bam==2){
                     try {
                         red_heart2._image=ImageIO.read(new File("src/image/white_heart.png"));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
-                if (bam==3){
+                else if (bam==3){
                     try {
                         red_heart3._image=ImageIO.read(new File("src/image/white_heart.png"));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                }
-                if (bam==4){
                     block_timer.stop();
                     dispose();
                     try {
@@ -214,6 +213,7 @@ class Game_fly extends JFrame {
                     }
                 }
             }
+            wasCl=isCl;
             if(blocks_1.x==0){
                 blocks_1.x=Blocks.xx1;
                 int[] num = {Blocks.yy1,Blocks.yy2,Blocks.yy3,Blocks.yy4};
@@ -246,34 +246,6 @@ class Game_fly extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            boolean n = false;
-            if (qwerty.getX() >= 25 && qwerty.getX() <= 171 && qwerty.getY() >= 500 && qwerty.getY() <= 683)
-            {
-                try {
-                    Rooms.room_next(n);
-                    my_timer.stop();
-                    dispose();
-                    Rooms.class_room();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (qwerty.getX() >= 1750 && qwerty.getX() <= 1893 && qwerty.getY() >= 500 && qwerty.getY() <= 683)
-            {
-                n=true;
-                try {
-                    Rooms.room_next(n);
-                    my_timer.stop();
-                    dispose();
-                    Rooms.class_room();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            /*if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 800 && qwerty.getY() <= 1015)
-            {
-
-            }*/
         }
 
         @Override
@@ -306,31 +278,10 @@ class Game_fly extends JFrame {
         }
     };
 
-    Timer timer = new Timer(100,al2);
+    Timer timer = new Timer(1000,al2);
 
 }
-class Player
-{
-    int x;
-    int y;
-    BufferedImage image;
-    public Player (int x_, int y_, BufferedImage image_)
-    {
-         x = x_;
-         y = y_;
-         image = image_;
-    }
-    public boolean bam (Rectangle temp)
-    {
-        Rectangle boarder= new Rectangle(x,y,image.getWidth(), image.getHeight() );
-        if (boarder.intersects(temp))
-        {
-            System.out.println("boom!!!!!");
-            return true;
-        }
-        return false;
-    }
-}
+
 
 
 
