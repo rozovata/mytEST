@@ -10,10 +10,10 @@ class Bath_room1 extends JFrame {
 
     public static void main(String[] args) throws IOException {
 
-        Time.NeedsTime(sleepNeeds);
+        /*Time.NeedsTime(sleepNeeds);
         Time.NeedsTime(showerNeeds);
         Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);
+        Time.NeedsTime(gameNeeds);*/
         Bath_room1 game = new Bath_room1();
     }
     // Инициализируем
@@ -48,25 +48,15 @@ class Bath_room1 extends JFrame {
     };
 
 
-    static Needs sleepNeeds;
-    static Needs showerNeeds;
-    static Needs foodNeeds;
-    static Needs gameNeeds;
+    Needs sleepNeeds;
+    Needs showerNeeds;
+    Needs foodNeeds;
+    Needs gameNeeds;
 
-    static {
-        try {
-            sleepNeeds = new Needs("test.txt", sleepImages);
-            showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages );
-            gameNeeds = new Needs("test3.txt", gameImages );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    Sleep sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
-    Shower shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
-    Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
-    Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+    Sleep sleep;
+    Shower shower;
+    Food food;
+    Game game;
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
 
@@ -112,10 +102,12 @@ class Bath_room1 extends JFrame {
 
                 bath++;
                 try (FileWriter fileWriter = new FileWriter(showerNeeds.filePath)){
+
                     if (showerNeeds.counter>0)
                     {
                         showerNeeds.counter--;
                     }
+
                     fileWriter.write(String.valueOf(showerNeeds.counter));
                     fileWriter.flush();
                 } catch (IOException e) {
@@ -188,6 +180,22 @@ class Bath_room1 extends JFrame {
         }
     } ;
     Bath_room1() throws IOException {
+        sleepNeeds = new Needs("test.txt", sleepImages);
+        showerNeeds = new Needs("test2.txt", showerImages);
+        foodNeeds = new Needs("test1.txt", foodImages );
+        gameNeeds = new Needs("test3.txt", gameImages );
+
+
+        sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
+        shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
+        food = new Food(foodNeeds.getCurrentImagePath(),0,0);
+        game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+
+        sleep._image = sleepNeeds.image;
+        shower._image = showerNeeds.image;
+        food._image = foodNeeds.image;
+        game._image = gameNeeds.image;
+
         setSize(1920,1080);
         setVisible(true);
         addKeyListener(KL);

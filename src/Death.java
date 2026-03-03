@@ -93,8 +93,8 @@ class Death extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            dispose();
             new g();
+            dispose();
 
         }
 

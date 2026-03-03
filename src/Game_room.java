@@ -10,10 +10,10 @@ class Game_room extends JFrame {
 
     public static void main(String[] args) throws IOException {
 
-        Time.NeedsTime(sleepNeeds);
+        /*Time.NeedsTime(sleepNeeds);
         Time.NeedsTime(showerNeeds);
         Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);
+        Time.NeedsTime(gameNeeds);*/
         Game_room game = new Game_room();
     }
     // Инициализируем
@@ -48,28 +48,19 @@ class Game_room extends JFrame {
     };
 
 
-    static Needs sleepNeeds;
-    static Needs showerNeeds;
-    static Needs foodNeeds;
-    static Needs gameNeeds;
+    Needs sleepNeeds;
+    Needs showerNeeds;
+    Needs foodNeeds;
+    Needs gameNeeds;
 
-    static {
-        try {
-            sleepNeeds = new Needs("test.txt", sleepImages);
-            showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages );
-            gameNeeds = new Needs("test3.txt", gameImages );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    Sleep sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
-    Shower shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
-    Food food = new Food(foodNeeds.getCurrentImagePath(),0,0);
-    Game game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+    Sleep sleep;
+    Shower shower;
+    Food food;
+    Game game;
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
     botton play_button = new botton("src/image/play_button.png");
+    botton play_array = new botton("src/image/play_array.png");
 
 
     ActionListener al = new ActionListener() {
@@ -130,6 +121,22 @@ class Game_room extends JFrame {
         }
     } ;
     Game_room() throws IOException {
+        sleepNeeds = new Needs("test.txt", sleepImages);
+        showerNeeds = new Needs("test2.txt", showerImages);
+        foodNeeds = new Needs("test1.txt", foodImages );
+        gameNeeds = new Needs("test3.txt", gameImages );
+
+        sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
+        shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
+        food = new Food(foodNeeds.getCurrentImagePath(),0,0);
+        game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+
+
+        sleep._image = sleepNeeds.image;
+        shower._image = showerNeeds.image;
+        food._image = foodNeeds.image;
+        game._image = gameNeeds.image;
+
         setSize(1920,1080);
         setVisible(true);
         addKeyListener(KL);
@@ -162,6 +169,7 @@ class Game_room extends JFrame {
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
         if (play_button != null) test.drawImage(play_button._image, 0,0,this);
+        if (play_array != null) test.drawImage(play_array._image, 0,0,this);
 
 
 
@@ -202,6 +210,17 @@ class Game_room extends JFrame {
                 try {
                     dispose();
                     new Game_fly();
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 572 && qwerty.getY() <= 785)
+            {
+                try {
+                    dispose();
+                    new Game_gift();
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

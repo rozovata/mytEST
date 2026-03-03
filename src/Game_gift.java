@@ -148,12 +148,12 @@ class Game_gift extends JFrame {
                 }
                 else{
                     block_timer.stop();
-                    dispose();
                     try {
                         new Game_room();
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    dispose();
                 }
             }
             else {gift.y=gift.y+10;}

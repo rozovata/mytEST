@@ -306,12 +306,13 @@ class osn1 extends JFrame implements KeyListener {
             }*/
             if(qwerty.getX() >= 623 && qwerty.getX()<= 977 && qwerty.getY() >= 27 && qwerty.getY()<= 153 )
             {
-                dispose();//закрывает окно
                 try {
                     new Bath_room1();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                dispose();//закрывает окно
+
             }
         }
 

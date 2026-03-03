@@ -205,12 +205,13 @@ class Game_fly extends JFrame {
                         throw new RuntimeException(ex);
                     }
                     block_timer.stop();
-                    dispose();
+
                     try {
                         new Game_room();
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    dispose();
                 }
             }
             wasCl=isCl;
