@@ -201,6 +201,6 @@ class Game_gift extends JFrame {
 
 }
 
-
+//почему
 
 
