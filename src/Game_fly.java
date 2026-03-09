@@ -77,7 +77,7 @@ class Game_fly extends JFrame {
             "src/image/void.png",
             200, 650);
     Blocks blocks_1 = new Blocks("src/image/stone2.png","src/image/stone2.png","src/image/stone2.png",0,250,800);
-    Player player = new Player (Bear.x ,Bear.y,Bear._image);
+    Player player = new Player (Bear.x ,Bear.y,"src/image/bear_fly.png");
     character red_heart1  = new character("src/image/red_heart.png", 0, 0);
     character red_heart2  = new character("src/image/red_heart.png", 0, 0);
     character red_heart3  = new character("src/image/red_heart.png", 0, 0);
@@ -91,23 +91,20 @@ class Game_fly extends JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
+            if (key == KeyEvent.VK_LEFT && player.x>0) {
                 Bear.x -= 5;
                 player.x -= 5;
 
             }
-            if (key == KeyEvent.VK_RIGHT) {
+            if (key == KeyEvent.VK_RIGHT  && player.x<1920-player.image.getWidth()) {
                 Bear.x += 5;
                 player.x += 5;
             }
-            if (key == KeyEvent.VK_SPACE) {
-                System.out.println("Ты нажал на мишку");
-            }
-            if (key == KeyEvent.VK_UP) {
+            if (key == KeyEvent.VK_UP && player.y>0) {
                 Bear.y -= 5;
                 player.y -= 5;
             }
-            if (key == KeyEvent.VK_DOWN) {
+            if (key == KeyEvent.VK_DOWN && player.y<1080-player.image.getHeight()) {
                 Bear.y += 5;
                 player.y += 5;
             }

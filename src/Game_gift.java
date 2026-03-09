@@ -10,7 +10,6 @@ class Game_gift extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
-
         Game_gift game = new Game_gift();
     }
 
@@ -70,10 +69,9 @@ class Game_gift extends JFrame {
 
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
     character fon = new character("src/image/fon_gift_game.png", 0, 0);
-    character gf = new character("src/image/gift.png", 0, 0);
-    Player gift = new Player(1920/2-70,0,gf._image);
-    character platform = new character("src/image/platform.png",1920/2-150,800);
-
+    // character gf = new character("src/image/gift.png", 0, 0);
+    static Player gift = new Player(1920/2-70,0,"src/image/gift.png");
+    static character platform = new character("src/image/platform.png",1920/2-150,800);
 
 
     KeyListener KL = new KeyListener() {
@@ -84,15 +82,13 @@ class Game_gift extends JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
+            if (key == KeyEvent.VK_LEFT && platform.x>0) {
                 platform.x -= 10;
-
+                with_platform2();
             }
-            if (key == KeyEvent.VK_RIGHT) {
+            if (key == KeyEvent.VK_RIGHT && platform.x<1920-platform._image.getWidth()) {
                 platform.x += 10;
-            }
-            if (key == KeyEvent.VK_SPACE) {
-                System.out.println("Ты нажал на мишку");
+                with_platform1();
             }
             repaint();
         }
@@ -113,6 +109,9 @@ class Game_gift extends JFrame {
         block_timer.start();
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
     }
 
     BufferedImage  bi;
@@ -126,25 +125,39 @@ class Game_gift extends JFrame {
         Graphics2D test = bi.createGraphics();
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
         if (platform._image != null) test.drawImage(platform._image, platform.x, platform.y, this);
-        if (gift.image != null) test.drawImage(gift.image, gift.x, gift.y, this);
+        if (gift_1.image != null) test.drawImage(gift_1.image, gift_1.x, gift_1.y, this);
+        if (gift_2.image != null) test.drawImage(gift_2.image, gift_2.x, gift_2.y, this);
+        if (gift_3.image != null) test.drawImage(gift_3.image, gift_3.x, gift_3.y, this);
+        if (gift_4.image != null) test.drawImage(gift_4.image, gift_4.x, gift_4.y, this);
+        if (gift_5.image != null) test.drawImage(gift_5.image, gift_5.x, gift_5.y, this);
 
         g.drawImage(bi,0,0,this);
 
 
 
     }
-    Random inn = new Random();
+    static Random inn = new Random();
+    static Player gift_1=new Player(inn.nextInt(0,1920-gift.image.getWidth()),0,"src/image/gift.png");
+    static Player gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-500,"src/image/gift.png");
+    static Player gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1000,"src/image/gift.png");
+    static Player gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1500,"src/image/gift.png");
+    static Player gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2000,"src/image/gift.png");
+    static Boolean[] mas_pl={false,false,false,false,false};
+    static Player[] mas_Player={gift_1,gift_2,gift_3,gift_4,gift_5};
+    static int Y = platform.y;
+    static int X = platform.x;
+    static int Width = platform._image.getWidth();
+    static int Height = platform._image.getHeight();
+    Random in = new Random();
     ActionListener al1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Rectangle pl= new Rectangle(platform.x, platform.y,platform._image.getWidth(),platform._image.getHeight());
-            if(gift.y>=platform.y-platform._image.getHeight()){
-                if( gift.bam(pl) )
+
+            if( with_platform3())
+            {
+                if( BAM() )
                 {
                     System.out.println("попадение");
-                    int randIndex = inn.nextInt(platform._image.getWidth()/2,1920-platform._image.getWidth()/2);
-                    gift.x=randIndex;
-                    gift.y=0;
                 }
                 else{
                     block_timer.stop();
@@ -156,7 +169,15 @@ class Game_gift extends JFrame {
                     dispose();
                 }
             }
-            else {gift.y=gift.y+10;}
+            else {
+                for (int i=0; i<5; i++)
+            {
+                if (mas_pl[i]==false)
+                {
+                    mas_Player[i].y+= 10;
+                }
+            }
+            }
             repaint();
         }
     } ;
@@ -198,9 +219,69 @@ class Game_gift extends JFrame {
     };
 
     Timer timer = new Timer(1000,al2);
+    public void with_platform1 ()
+    {
+        for (int i=0; i<5; i++)
+        {
+            if (mas_pl[i]==true)
+            {
+                mas_Player[i].x+= 10;
+            }
+        }
+    }
+    public void with_platform2 ()
+    {
+        for (int i=0; i<5; i++)
+        {
+            if (mas_pl[i]==true)
+            {
+                mas_Player[i].x-= 10;
+            }
+        }
+    }
+    public boolean with_platform3 ()
+    {
+
+        for (int i=0; i<5; i++)
+        {
+            if (mas_Player[i].y+mas_Player[i].image.getHeight()>=Y && mas_pl[i]!=true)
+            {
+                System.out.println("!!! ПОДАРОК " + i + " ОСТАНОВЛЕН на y=" + mas_Player[i].y);
+                mas_pl[i]=true;
+                mas_Player[i].y= Y - mas_Player[i].image.getHeight() +5;
+                System.out.println("ooo");
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public boolean BAM ()
+    {
+        System.out.println("BAM: подарок на платформе");
+
+        Rectangle pl= new Rectangle(X, Y,Width,Height);
+        for (int i=0; i<5; i++)
+        {
+            if (mas_Player[i].bam(pl) && mas_pl[i]!=true)
+            {
+                mas_Player[i].y= Y - mas_Player[i].image.getHeight();
+                System.out.println("BAM: подарок " + i + " на платформе");
+
+                System.out.println("333");
+                X=mas_Player[i].x;
+                Y=mas_Player[i].y;
+                Width=mas_Player[i].image.getWidth();
+                Height=mas_Player[i].image.getHeight();
+                System.out.println("111");
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
 }
-
-//почему
 
 
