@@ -83,11 +83,11 @@ class Game_gift extends JFrame {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_LEFT && platform.x>0) {
-                platform.x -= 10;
+                platform.x -= 15;
                 with_platform2();
             }
             if (key == KeyEvent.VK_RIGHT && platform.x<1920-platform._image.getWidth()) {
-                platform.x += 10;
+                platform.x += 15;
                 with_platform1();
             }
             repaint();
@@ -138,16 +138,17 @@ class Game_gift extends JFrame {
     }
     static Random inn = new Random();
     static Player gift_1=new Player(inn.nextInt(0,1920-gift.image.getWidth()),0,"src/image/gift.png");
-    static Player gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-500,"src/image/gift.png");
-    static Player gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1000,"src/image/gift.png");
-    static Player gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1500,"src/image/gift.png");
-    static Player gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2000,"src/image/gift.png");
+    static Player gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-800,"src/image/gift.png");
+    static Player gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1600,"src/image/gift.png");
+    static Player gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2400,"src/image/gift.png");
+    static Player gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-3200,"src/image/gift.png");
     static Boolean[] mas_pl={false,false,false,false,false};
     static Player[] mas_Player={gift_1,gift_2,gift_3,gift_4,gift_5};
     static int Y = platform.y;
     static int X = platform.x;
     static int Width = platform._image.getWidth();
     static int Height = platform._image.getHeight();
+    int count = 0;
     Random in = new Random();
     ActionListener al1 = new ActionListener() {
         @Override
@@ -155,9 +156,10 @@ class Game_gift extends JFrame {
 
             if( with_platform3())
             {
-                if( BAM() )
+                if( BAM() && count<=2 )
                 {
                     System.out.println("попадение");
+                    count++;
                 }
                 else{
                     block_timer.stop();
@@ -166,6 +168,16 @@ class Game_gift extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    gift_1=new Player(inn.nextInt(0,1920-gift.image.getWidth()),0,"src/image/gift.png");
+                    gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-800,"src/image/gift.png");
+                    gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1600,"src/image/gift.png");
+                    gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2400,"src/image/gift.png");
+                    gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-3200,"src/image/gift.png");
+                    mas_pl= new Boolean[]{false, false, false, false, false};
+                    Y = platform.y;
+                    X = platform.x;
+                    Width = platform._image.getWidth();
+                    Height = platform._image.getHeight();
                     dispose();
                 }
             }
@@ -225,7 +237,7 @@ class Game_gift extends JFrame {
         {
             if (mas_pl[i]==true)
             {
-                mas_Player[i].x+= 10;
+                mas_Player[i].x+= 15;
             }
         }
     }
@@ -235,7 +247,7 @@ class Game_gift extends JFrame {
         {
             if (mas_pl[i]==true)
             {
-                mas_Player[i].x-= 10;
+                mas_Player[i].x-= 15;
             }
         }
     }
@@ -246,9 +258,20 @@ class Game_gift extends JFrame {
         {
             if (mas_Player[i].y+mas_Player[i].image.getHeight()>=Y && mas_pl[i]!=true)
             {
+                int t=0;
                 System.out.println("!!! ПОДАРОК " + i + " ОСТАНОВЛЕН на y=" + mas_Player[i].y);
-                mas_pl[i]=true;
-                mas_Player[i].y= Y - mas_Player[i].image.getHeight() +5;
+                for (int p=0; p<5; p++)
+                {
+                    if (mas_Player[p].y+10>=Y && mas_Player[p].y-10<=Y )
+                    {
+                        X=mas_Player[p].x;
+                        t=1;
+                        System.out.println("yt");
+                    }
+
+                }
+                if(t==0){X=platform.x;
+                System.out.println("ytt");}
                 System.out.println("ooo");
                 return true;
             }
@@ -265,11 +288,10 @@ class Game_gift extends JFrame {
         {
             if (mas_Player[i].bam(pl) && mas_pl[i]!=true)
             {
-                mas_Player[i].y= Y - mas_Player[i].image.getHeight();
+                mas_pl[i]=true ;
                 System.out.println("BAM: подарок " + i + " на платформе");
-
+                mas_Player[i].y= Y - mas_Player[i].image.getHeight();
                 System.out.println("333");
-                X=mas_Player[i].x;
                 Y=mas_Player[i].y;
                 Width=mas_Player[i].image.getWidth();
                 Height=mas_Player[i].image.getHeight();
