@@ -41,7 +41,7 @@ class osn1 extends JFrame implements KeyListener {
     int p=1;
     int l=1;
     int m=1;
-
+//mm
     BufferedImage bi ;
 
     osn1() {
