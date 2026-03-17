@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.time.LocalDateTime;
 
 class Death extends JFrame {
 
@@ -77,6 +78,15 @@ class Death extends JFrame {
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Time.SaveTime(LocalDateTime.now());
+        Needs.CounteSaveFile2(0,"test.txt");
+        Needs.CounteSaveFile2(0,"test1.txt");
+        Needs.CounteSaveFile2(0,"test2.txt");
+        Needs.CounteSaveFile2(0,"test3.txt");
+        osn1.SaveFile(1,"boots.txt");
+        osn1.SaveFile(1,"head.txt");
+        osn1.SaveFile(1,"top.txt");
+        osn1.SaveFile(1,"trousers.txt");
     }
 
     BufferedImage  bi;

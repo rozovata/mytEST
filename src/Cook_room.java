@@ -4,16 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.time.LocalDateTime;
 
 class Cook_room extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        /*Time.NeedsTime(sleepNeeds);
-        Time.NeedsTime(showerNeeds);
-        Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);*/
         Cook_room game = new Cook_room();
     }
     // Инициализируем
@@ -84,7 +81,7 @@ class Cook_room extends JFrame {
         }
     };
 
-
+    character exit = new character("src/image/exit..png", 0, 0);
     Timer my_timer = new Timer(10000,al); //таймер через 100 секунд совершает действия в actionlistener
     character fon = new character("src/image/Cook_room.png", 0, 0);
     character fon1 = new character("src/image/desk.png", 0, 0);
@@ -186,6 +183,7 @@ class Cook_room extends JFrame {
         if (arrowleft._image != null) test.drawImage(arrowleft._image, 0,0,this);
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
+        if (exit != null) test.drawImage(exit._image, exit.x, exit.y, this);
 
 
         g.drawImage(bi,0,0,this);
@@ -195,6 +193,17 @@ class Cook_room extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
+            if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
+            {
+                try {
+                    Needs.CounteSaveFile2(1,"rooms.txt");
+                    Time.SaveTime(LocalDateTime.now());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                System.exit(0);
+
+            }
             if (qwerty.getX() >= 1280 && qwerty.getX()<= 1371 && qwerty.getY() >= 875 && qwerty.getY()<= 1020 )
             {
                 meal+=1;
@@ -237,8 +246,8 @@ class Cook_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -249,8 +258,8 @@ class Cook_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

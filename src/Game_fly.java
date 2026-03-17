@@ -77,6 +77,7 @@ class Game_fly extends JFrame {
             "src/image/void.png",
             200, 650);
     Blocks blocks_1 = new Blocks("src/image/stone2.png","src/image/stone2.png","src/image/stone2.png",0,250,800);
+    Blocks blocks_2 = new Blocks("src/image/stone2.png","src/image/stone2.png","src/image/stone2.png",0,250,500);
     Player player = new Player (Bear.x ,Bear.y,"src/image/bear_fly.png");
     character red_heart1  = new character("src/image/red_heart.png", 0, 0);
     character red_heart2  = new character("src/image/red_heart.png", 0, 0);
@@ -92,21 +93,21 @@ class Game_fly extends JFrame {
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_LEFT && player.x>0) {
-                Bear.x -= 5;
-                player.x -= 5;
+                Bear.x -= 10;
+                player.x -= 10;
 
             }
             if (key == KeyEvent.VK_RIGHT  && player.x<1920-player.image.getWidth()) {
-                Bear.x += 5;
-                player.x += 5;
+                Bear.x += 10;
+                player.x += 10;
             }
             if (key == KeyEvent.VK_UP && player.y>0) {
-                Bear.y -= 5;
-                player.y -= 5;
+                Bear.y -= 10;
+                player.y -= 10;
             }
             if (key == KeyEvent.VK_DOWN && player.y<1080-player.image.getHeight()) {
-                Bear.y += 5;
-                player.y += 5;
+                Bear.y += 10;
+                player.y += 10;
             }
             repaint();
         }
@@ -136,7 +137,7 @@ class Game_fly extends JFrame {
         Graphics2D g2d = (Graphics2D) g;
 
 
-        g2d.setColor(Color.RED);
+       /* g2d.setColor(Color.RED);
         g2d.drawRect(player.x , player.y ,
                 player.image.getWidth() - 10, player.image.getHeight() - 10);
 
@@ -149,13 +150,16 @@ class Game_fly extends JFrame {
                 blocks_1.image3.getWidth() - 10, blocks_1.image3.getHeight() - 10);
         if (bi == null) {
             bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        }
+        }*/
         Graphics2D test = bi.createGraphics();
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
         if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
         if (blocks_1.image1 != null) test.drawImage(blocks_1.image1, blocks_1.x, blocks_1.y1, this);
         if (blocks_1.image2 != null) test.drawImage(blocks_1.image2, blocks_1.x, blocks_1.y2, this);
         if (blocks_1.image3 != null) test.drawImage(blocks_1.image3, blocks_1.x, blocks_1.y3, this);
+        if (blocks_2.image1 != null) test.drawImage(blocks_2.image1, blocks_2.x2, blocks_2.y1, this);
+        if (blocks_2.image2 != null) test.drawImage(blocks_2.image2, blocks_2.x2, blocks_2.y2, this);
+        if (blocks_2.image3 != null) test.drawImage(blocks_2.image3, blocks_2.x2, blocks_2.y3, this);
         //if (white_heart._image != null) test.drawImage(white_heart._image, white_heart.x, white_heart.y, this);
         if (red_heart1._image != null) test.drawImage(red_heart1._image, red_heart1.x, red_heart1.y, this);
         if (red_heart2._image != null) test.drawImage(red_heart2._image, 200, red_heart2.y, this);
@@ -176,7 +180,11 @@ class Game_fly extends JFrame {
             Rectangle bl1= new Rectangle(blocks_1.x, blocks_1.y1,blocks_1.image1.getWidth()-10,blocks_1.image1.getHeight()-10);
             Rectangle bl2= new Rectangle(blocks_1.x, blocks_1.y2,blocks_1.image2.getWidth()-10,blocks_1.image2.getHeight()-10);
             Rectangle bl3= new Rectangle(blocks_1.x, blocks_1.y3,blocks_1.image3.getWidth()-10,blocks_1.image3.getHeight()-10);
-            boolean isCl = player.bam(bl1) || player.bam(bl2) || player.bam(bl3);
+            Rectangle bl4= new Rectangle(blocks_2.x2, blocks_2.y1,blocks_2.image1.getWidth()-10,blocks_2.image1.getHeight()-10);
+            Rectangle bl5= new Rectangle(blocks_2.x2, blocks_2.y2,blocks_2.image2.getWidth()-10,blocks_2.image2.getHeight()-10);
+            Rectangle bl6= new Rectangle(blocks_2.x2, blocks_2.y3,blocks_2.image3.getWidth()-10,blocks_2.image3.getHeight()-10);
+
+            boolean isCl = player.bam(bl1) || player.bam(bl2) || player.bam(bl3) || player.bam(bl4) || player.bam(bl5) || player.bam(bl6);
             if( isCl && !wasCl )
             {
                 bam++;
@@ -212,7 +220,7 @@ class Game_fly extends JFrame {
                 }
             }
             wasCl=isCl;
-            if(blocks_1.x==0){
+            if(blocks_1.x== - blocks_1.image3.getWidth()){
                 blocks_1.x=Blocks.xx1;
                 int[] num = {Blocks.yy1,Blocks.yy2,Blocks.yy3,Blocks.yy4};
                 int randIndex = inn.nextInt(num.length);
@@ -235,8 +243,34 @@ class Game_fly extends JFrame {
 
 
             }
-            else {blocks_1.x=blocks_1.x-10;}
+            else {blocks_1.x=blocks_1.x-15;}
             repaint();
+            if(blocks_2.x2 == -blocks_1.image3.getWidth()){
+                blocks_2.x2=Blocks.xx1;
+                int[] num = {Blocks.yy1,Blocks.yy2,Blocks.yy3,Blocks.yy4};
+                int randIndex = inn.nextInt(num.length);
+
+                blocks_2.y1 =num[randIndex];
+                blocks_2.y2=blocks_2.y1;
+                blocks_2.y3=blocks_2.y1;
+                while (blocks_2.y2==blocks_2.y1 )
+                {
+                    randIndex = inn.nextInt(num.length);
+                    blocks_2.y2 =num[randIndex];
+
+                }
+                while (blocks_2.y3==blocks_2.y1 || blocks_2.y3==blocks_2.y2 )
+                {
+                    randIndex = inn.nextInt(num.length);
+                    blocks_2.y3 =num[randIndex];
+
+                }
+
+
+            }
+            else {blocks_2.x2=blocks_2.x2-15;}
+            repaint();
+
         }
     } ;
     Timer block_timer = new Timer(100,al1); //таймер через 10 секунд совершает действия в actionlistener
@@ -276,7 +310,7 @@ class Game_fly extends JFrame {
         }
     };
 
-    Timer timer = new Timer(1000,al2);
+    Timer timer = new Timer(5000,al2);
 
 }
 

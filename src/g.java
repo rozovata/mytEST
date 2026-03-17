@@ -67,12 +67,8 @@ public class g extends JFrame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-
         }
     } ;
-
-
-
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
@@ -88,7 +84,15 @@ public class g extends JFrame {
             if (qwerty.getX() >= 665 && qwerty.getX()<= 1280 && qwerty.getY() >= 634 && qwerty.getY()<= 634+598-483 )
             {
                 System.exit(0);
-
+            }
+            if (qwerty.getX() >= 665 && qwerty.getX()<= 1280 && qwerty.getY() >= 482 && qwerty.getY()<= 600 )
+            {
+                try {
+                    new Setting_text();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                dispose();
             }
 
         }
@@ -125,11 +129,18 @@ public class g extends JFrame {
         addMouseListener(ML);
 
         try {
-            Time.NeedsTime(foodNeeds);
-            Time.NeedsTime(sleepNeeds);
-            Time.NeedsTime(showerNeeds);
-            Time.NeedsTime(gameNeeds);
+            if(Time.NeedsTime2(foodNeeds)==1 ||
+            Time.NeedsTime2(sleepNeeds)==1 ||
+            Time.NeedsTime2(showerNeeds)==1 ||
+            Time.NeedsTime2(gameNeeds)==1)
+            {
+                new Death();
+                dispose();
+            }
+
         } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -137,6 +148,7 @@ public class g extends JFrame {
     character setting = new character("src/image/setting.png", 0, 0);
     character play = new character("src/image/play.png",0,0);
     character exit = new character("src/image/exit.png",0,0);
+
     BufferedImage  bi;
 
     public void paint(Graphics g)

@@ -4,16 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.time.LocalDateTime;
 
 class Bath_room1 extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        /*Time.NeedsTime(sleepNeeds);
-        Time.NeedsTime(showerNeeds);
-        Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);*/
         Bath_room1 game = new Bath_room1();
     }
     // Инициализируем
@@ -66,7 +63,6 @@ class Bath_room1 extends JFrame {
         public void actionPerformed(ActionEvent ee) {
             try {
                 // Обновляем картинки в объектах
-
 
                 sleepNeeds.next();
                 showerNeeds.next();
@@ -121,7 +117,7 @@ class Bath_room1 extends JFrame {
                 shower._image = showerNeeds.image;
                 repaint();
 
-                if (!timerbath.isRunning()) { // ← ЗАПУСКАЕМ ТАЙМЕР
+                if (!timerbath.isRunning()) {
                     timerbath.start();
                 }
             }
@@ -142,7 +138,7 @@ class Bath_room1 extends JFrame {
 
         }
     };
-
+    character exit = new character("src/image/exit..png", 0, 0);
     Timer timerbath = new Timer(1000,al1);
     character fon = new character("src/image/Bath_room.png", 0, 0);
     bear Bear = new bear("src/image/bear.png",
@@ -214,7 +210,6 @@ class Bath_room1 extends JFrame {
         }
         Graphics2D test = bi.createGraphics();
 
-
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
         if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
         if (sleep._image != null) test.drawImage(sleep._image, sleep.x, sleep.y, this);
@@ -227,6 +222,7 @@ class Bath_room1 extends JFrame {
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
+        if (exit != null) test.drawImage(exit._image, exit.x, exit.y, this);
 
 
 
@@ -238,6 +234,17 @@ class Bath_room1 extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
+            if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
+            {
+                try {
+                    Needs.CounteSaveFile2(1,"rooms.txt");
+                    Time.SaveTime(LocalDateTime.now());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                System.exit(0);
+
+            }
             if (qwerty.getX() >= 0 && qwerty.getX() <= 950 && qwerty.getY() >= 500 && qwerty.getY() <= 1080) {
                 bath += 1;
                 if (!timerbath.isRunning()) {
@@ -245,8 +252,8 @@ class Bath_room1 extends JFrame {
                 }
             }
             if (qwerty.getX() >= 1130 && qwerty.getX() <= 1385 && qwerty.getY() >= 245 && qwerty.getY() <= 600) {
-                dispose();//закрывает окно
                 new osn1();
+                dispose();//закрывает окно
 
             }
             repaint();
@@ -257,8 +264,8 @@ class Bath_room1 extends JFrame {
                     Rooms.room_next(n);
                     my_timer.stop();
                     timerbath.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -270,8 +277,8 @@ class Bath_room1 extends JFrame {
                     Rooms.room_next(n);
                     my_timer.stop();
                     timerbath.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

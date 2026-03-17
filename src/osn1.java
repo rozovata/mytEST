@@ -15,7 +15,6 @@ class osn1 extends JFrame implements KeyListener {
     }
     character fon = new character("src/image/fon1.png", 0, 0);
 
-    //Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Tom/Documents/Школа/fon1.png");
     character no = new character("src/image/no.png", 0, 0);
     bear Bear = new bear("src/image/Bear.png",
             bear.top(),
@@ -74,10 +73,10 @@ class osn1 extends JFrame implements KeyListener {
         if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
         if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
-        if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
-        if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
+       // if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
+       // if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
         if (panel._image != null) test.drawImage(panel._image, panel.x, panel.y, this);
-        if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
+        //if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
         if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
 
         if (pole._image != null) {

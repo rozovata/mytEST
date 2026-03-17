@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 class Living_room1 extends JFrame {
@@ -11,10 +12,6 @@ class Living_room1 extends JFrame {
 
     public static void main(String[] args) throws IOException {
 
-        /*Time.NeedsTime(sleepNeeds);
-        Time.NeedsTime(showerNeeds);
-        Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);*/;
         Living_room1 game = new Living_room1();
 
     }
@@ -117,7 +114,7 @@ class Living_room1 extends JFrame {
                 sleep._image = sleepNeeds.image;
                 repaint();
 
-                if (!timerBad.isRunning()) { // ← ЗАПУСКАЕМ ТАЙМЕР
+                if (!timerBad.isRunning()) {
                     timerBad.start();
                 }
             }
@@ -138,7 +135,7 @@ class Living_room1 extends JFrame {
 
         }
     };
-
+    character exit = new character("src/image/exit..png", 0, 0);
     Timer timerBad = new Timer(1000,al1);
     character fon = new character("src/image/Bad_room.png", 0, 0);
     bear Bear = new bear("src/image/bear.png",
@@ -222,6 +219,7 @@ class Living_room1 extends JFrame {
         if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
         if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
+        if (exit != null) test.drawImage(exit._image, exit.x, exit.y, this);
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
 
@@ -233,22 +231,27 @@ class Living_room1 extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            //System.out.println("=== МЫШЬ КЛИКНУТА ===");
-            //System.out.println("Координаты: X=" + qwerty.getX() + " Y=" + qwerty.getY());
+            if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
+            {
+                try {
+                    Needs.CounteSaveFile2(1,"rooms.txt");
+                    Time.SaveTime(LocalDateTime.now());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                System.exit(0);
 
+            }
             if (qwerty.getX() >= 900 && qwerty.getX() <= 1700 && qwerty.getY() >= 412 && qwerty.getY() <= 840) {
-                //System.out.println("ПОПАДАНИЕ В ОБЛАСТЬ!");
                 bad += 1;
-                //System.out.println("bad увеличен до: " + bad);
+
 
                 if (!timerBad.isRunning()) {
-                    //System.out.println("Запускаем timerBad...");
                     timerBad.start();
                 } else {
-                    //System.out.println("timerBad уже работает");
                 }
             } else {
-                //System.out.println("МИМО области!");
+                //System.out.println("Мимо");
             }
             repaint();
             boolean n = false;
@@ -258,8 +261,8 @@ class Living_room1 extends JFrame {
                     Rooms.room_next(n);
                     timerBad.stop();
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -271,8 +274,8 @@ class Living_room1 extends JFrame {
                     Rooms.room_next(n);
                     timerBad.stop();
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

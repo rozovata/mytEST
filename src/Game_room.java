@@ -4,16 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.time.LocalDateTime;
 
 class Game_room extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
 
-        /*Time.NeedsTime(sleepNeeds);
-        Time.NeedsTime(showerNeeds);
-        Time.NeedsTime(foodNeeds);
-        Time.NeedsTime(gameNeeds);*/
         Game_room game = new Game_room();
     }
     // Инициализируем
@@ -84,6 +81,7 @@ class Game_room extends JFrame {
             repaint();
         }
     };
+    character exit = new character("src/image/exit..png", 0, 0);
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
     character fon = new character("src/image/game_room.png", 0, 0);
     bear Bear = new bear("src/image/bear.png",
@@ -170,6 +168,7 @@ class Game_room extends JFrame {
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
         if (play_button != null) test.drawImage(play_button._image, 0,0,this);
         if (play_array != null) test.drawImage(play_array._image, 0,0,this);
+        if (exit != null) test.drawImage(exit._image, exit.x, exit.y, this);
 
 
 
@@ -181,14 +180,25 @@ class Game_room extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
+            if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
+            {
+                try {
+                    Needs.CounteSaveFile2(1,"rooms.txt");
+                    Time.SaveTime(LocalDateTime.now());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                System.exit(0);
+
+            }
             boolean n = false;
             if (qwerty.getX() >= 25 && qwerty.getX() <= 171 && qwerty.getY() >= 500 && qwerty.getY() <= 683)
             {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -199,8 +209,8 @@ class Game_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    dispose();
                     Rooms.class_room();
+                    dispose();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -208,8 +218,9 @@ class Game_room extends JFrame {
             if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 800 && qwerty.getY() <= 1015)
             {
                 try {
-                    dispose();
+
                     new Game_fly();
+                    dispose();
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -218,8 +229,8 @@ class Game_room extends JFrame {
             if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 572 && qwerty.getY() <= 785)
             {
                 try {
-                    dispose();
                     new Game_gift();
+                    dispose();
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

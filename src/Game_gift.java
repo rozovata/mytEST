@@ -70,8 +70,8 @@ class Game_gift extends JFrame {
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
     character fon = new character("src/image/fon_gift_game.png", 0, 0);
     // character gf = new character("src/image/gift.png", 0, 0);
-    static Player gift = new Player(1920/2-70,0,"src/image/gift.png");
-    static character platform = new character("src/image/platform.png",1920/2-150,800);
+    Player gift = new Player(1920/2-70,0,"src/image/gift.png");
+    character platform = new character("src/image/platform1.png",1920/2-150,800);
 
 
     KeyListener KL = new KeyListener() {
@@ -136,18 +136,18 @@ class Game_gift extends JFrame {
 
 
     }
-    static Random inn = new Random();
-    static Player gift_1=new Player(inn.nextInt(0,1920-gift.image.getWidth()),0,"src/image/gift.png");
-    static Player gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-800,"src/image/gift.png");
-    static Player gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1600,"src/image/gift.png");
-    static Player gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2400,"src/image/gift.png");
-    static Player gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-3200,"src/image/gift.png");
-    static Boolean[] mas_pl={false,false,false,false,false};
-    static Player[] mas_Player={gift_1,gift_2,gift_3,gift_4,gift_5};
-    static int Y = platform.y;
-    static int X = platform.x;
-    static int Width = platform._image.getWidth();
-    static int Height = platform._image.getHeight();
+    Random inn = new Random();
+    Player gift_1=new Player(inn.nextInt(0,1920-gift.image.getWidth()),0,"src/image/gift.png");
+    Player gift_2=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-800,"src/image/gift.png");
+    Player gift_3=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-1600,"src/image/gift.png");
+    Player gift_4=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-2400,"src/image/gift.png");
+    Player gift_5=new Player(inn.nextInt(0,1920-gift.image.getWidth()),-3200,"src/image/gift.png");
+    Boolean[] mas_pl={false,false,false,false,false};
+    Player[] mas_Player={gift_1,gift_2,gift_3,gift_4,gift_5};
+    int Y = platform.y;
+    int X = platform.x;
+    int Width = platform._image.getWidth();
+    int Height = platform._image.getHeight();
     int count = 0;
     Random in = new Random();
     ActionListener al1 = new ActionListener() {
@@ -230,7 +230,7 @@ class Game_gift extends JFrame {
         }
     };
 
-    Timer timer = new Timer(1000,al2);
+    Timer timer = new Timer(5000,al2);
     public void with_platform1 ()
     {
         for (int i=0; i<5; i++)
@@ -281,7 +281,7 @@ class Game_gift extends JFrame {
     }
     public boolean BAM ()
     {
-        System.out.println("BAM: подарок на платформе");
+        System.out.println("подарок на платформе");
 
         Rectangle pl= new Rectangle(X, Y,Width,Height);
         for (int i=0; i<5; i++)

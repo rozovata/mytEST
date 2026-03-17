@@ -51,55 +51,5 @@ public class Rooms {
             new Game_room();
     }
 
- /*   public static void NEXT() {
-
-        MouseListener ML = new MouseListener() {
-
-            @Override
-            public void mouseClicked(MouseEvent qwerty) {
-                boolean n = false;
-                if (qwerty.getX() >= 25 && qwerty.getX() <= 171 && qwerty.getY() >= 500 && qwerty.getY() <= 683) {
-                    try {
-                        Rooms.room_next(n);
-                        dispose();
-                        Rooms.class_room();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                if (qwerty.getX() >= 1750 && qwerty.getX() <= 1893 && qwerty.getY() >= 500 && qwerty.getY() <= 683) {
-                    n = true;
-                    try {
-                        Rooms.room_next(n);
-                        dispose();
-                        Rooms.class_room();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        };
-    }*/
 
 }
