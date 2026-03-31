@@ -129,10 +129,10 @@ public class g extends JFrame {
         addMouseListener(ML);
 
         try {
-            if(Time.NeedsTime2(foodNeeds)==1 ||
-            Time.NeedsTime2(sleepNeeds)==1 ||
-            Time.NeedsTime2(showerNeeds)==1 ||
-            Time.NeedsTime2(gameNeeds)==1)
+            if(Time.NeedsTime(foodNeeds)==1 ||
+            Time.NeedsTime(sleepNeeds)==1 ||
+            Time.NeedsTime(showerNeeds)==1 ||
+            Time.NeedsTime(gameNeeds)==1)
             {
                 new Death();
                 dispose();

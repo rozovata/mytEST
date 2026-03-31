@@ -41,7 +41,7 @@ class osn1 extends JFrame implements KeyListener {
     int p=1;
     int l=1;
     int m=1;
-//mm
+
     BufferedImage bi ;
 
     osn1() {
@@ -73,11 +73,11 @@ class osn1 extends JFrame implements KeyListener {
         if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
         if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
         if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
-       // if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
-       // if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
+        if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
+        if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
         if (panel._image != null) test.drawImage(panel._image, panel.x, panel.y, this);
         //if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
-        if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
+        //if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
 
         if (pole._image != null) {
             test.drawImage(pole._image, 0, 0, this);
@@ -287,32 +287,29 @@ class osn1 extends JFrame implements KeyListener {
                 SaveFile(1,"boots.txt");
             }
             repaint();
-           /* if(m==1)
+            if(qwerty.getX() >= 53 && qwerty.getX()<= 300 && qwerty.getY() >= 660 && qwerty.getY()<= 907 )
             {
+                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"boots.txt");
-            }
-            if(p==1)
-            {
+                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                SaveFile(1,"trousers.txt");
+                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"head.txt");
-            }
-            if(i==1)
-            {
+                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"top.txt");
             }
-            if(l==1)
-            {
-                SaveFile(1,"trousers.txt");
-            }*/
-            if(qwerty.getX() >= 623 && qwerty.getX()<= 977 && qwerty.getY() >= 27 && qwerty.getY()<= 153 )
+            repaint();
+                if(qwerty.getX() >= 54 && qwerty.getX()<= 304 && qwerty.getY() >= 389 && qwerty.getY()<= 637 )
             {
                 try {
                     new Bath_room1();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                dispose();//закрывает окно
+                dispose();
 
             }
+
         }
 
 

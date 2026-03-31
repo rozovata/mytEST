@@ -52,7 +52,7 @@ class Game_fly extends JFrame {
     Needs foodNeeds = new Needs("test1.txt", foodImages );
     Needs gameNeeds = new Needs("test3.txt", gameImages );
 
-    ActionListener al = new ActionListener() {
+    /* ActionListener al = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ee) {
             try {
@@ -68,7 +68,7 @@ class Game_fly extends JFrame {
         }
     };
 
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
+    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener*/
     character fon = new character("src/image/fon_fly.png", 0, 0);
     bear Bear = new bear("src/image/bear_fly.png",
             "src/image/void.png",
@@ -124,7 +124,7 @@ class Game_fly extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
-        my_timer.start();
+        //my_timer.start();
         block_timer.start();
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -209,8 +209,9 @@ class Game_fly extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    //my_timer.stop();
                     block_timer.stop();
-
+                    timer.stop();
                     try {
                         new Game_room();
                     } catch (IOException ex) {

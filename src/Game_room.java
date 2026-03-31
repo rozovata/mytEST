@@ -218,7 +218,7 @@ class Game_room extends JFrame {
             if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 800 && qwerty.getY() <= 1015)
             {
                 try {
-
+                    my_timer.stop();
                     new Game_fly();
                     dispose();
 
@@ -229,6 +229,7 @@ class Game_room extends JFrame {
             if (qwerty.getX() >= 43 && qwerty.getX() <= 655 && qwerty.getY() >= 572 && qwerty.getY() <= 785)
             {
                 try {
+                    my_timer.stop();
                     new Game_gift();
                     dispose();
 

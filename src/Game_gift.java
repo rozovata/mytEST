@@ -51,7 +51,7 @@ class Game_gift extends JFrame {
     Needs foodNeeds = new Needs("test1.txt", foodImages );
     Needs gameNeeds = new Needs("test3.txt", gameImages );
 
-    ActionListener al = new ActionListener() {
+  /*  ActionListener al = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ee) {
             try {
@@ -67,7 +67,7 @@ class Game_gift extends JFrame {
         }
     };
 
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
+    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener*/
     character fon = new character("src/image/fon_gift_game.png", 0, 0);
     // character gf = new character("src/image/gift.png", 0, 0);
     Player gift = new Player(1920/2-70,0,"src/image/gift.png");
@@ -105,7 +105,7 @@ class Game_gift extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
-        my_timer.start();
+        //my_timer.start();
         block_timer.start();
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,7 +162,9 @@ class Game_gift extends JFrame {
                     count++;
                 }
                 else{
+                    //my_timer.stop();
                     block_timer.stop();
+                    timer.stop();
                     try {
                         new Game_room();
                     } catch (IOException ex) {

@@ -252,8 +252,10 @@ class Bath_room1 extends JFrame {
                 }
             }
             if (qwerty.getX() >= 1130 && qwerty.getX() <= 1385 && qwerty.getY() >= 245 && qwerty.getY() <= 600) {
+                my_timer.stop();
+                timerbath.stop();
                 new osn1();
-                dispose();//закрывает окно
+                dispose();
 
             }
             repaint();
