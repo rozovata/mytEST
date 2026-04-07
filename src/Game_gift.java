@@ -233,7 +233,7 @@ class Game_gift extends JFrame {
     };
 
     Timer timer = new Timer(5000,al2);
-    public void with_platform1 ()
+    public void with_platform1()
     {
         for (int i=0; i<5; i++)
         {
@@ -243,7 +243,7 @@ class Game_gift extends JFrame {
             }
         }
     }
-    public void with_platform2 ()
+    public void with_platform2()
     {
         for (int i=0; i<5; i++)
         {
@@ -253,7 +253,7 @@ class Game_gift extends JFrame {
             }
         }
     }
-    public boolean with_platform3 ()
+    public boolean with_platform3()
     {
 
         for (int i=0; i<5; i++)
@@ -281,7 +281,7 @@ class Game_gift extends JFrame {
         return false;
 
     }
-    public boolean BAM ()
+    public boolean BAM()
     {
         System.out.println("подарок на платформе");
 
