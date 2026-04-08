@@ -219,7 +219,8 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==2 )
             {
                 try {cake._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                foodNeeds.counter= foodNeeds.counter-3;
+                if (foodNeeds.counter-3>=0)
+                    foodNeeds.counter= foodNeeds.counter-3;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }
@@ -227,7 +228,8 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==3 )
             {
                 try {tea._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                foodNeeds.counter= foodNeeds.counter-2;
+                if (foodNeeds.counter-2>=0)
+                    foodNeeds.counter= foodNeeds.counter-2;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }
@@ -235,7 +237,8 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==4 )
             {
                 try {hot_dog._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                foodNeeds.counter= foodNeeds.counter-2;
+                if (foodNeeds.counter-2>=0)
+                    foodNeeds.counter= foodNeeds.counter-2;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }
