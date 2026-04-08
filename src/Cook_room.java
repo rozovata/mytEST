@@ -227,7 +227,7 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==3 )
             {
                 try {tea._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                foodNeeds.counter= foodNeeds.counter-1;
+                foodNeeds.counter= foodNeeds.counter-2;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }

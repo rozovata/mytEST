@@ -161,6 +161,7 @@ class Living_room1 extends JFrame {
             if (key == KeyEvent.VK_RIGHT) {
                 Bear.x += 2;
             }
+
             if (key == KeyEvent.VK_SPACE) {
                 System.out.println("Ты нажал на мишку");
             }
