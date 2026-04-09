@@ -274,7 +274,7 @@ class Game_fly extends JFrame {
 
         }
     } ;
-    Timer block_timer = new Timer(100,al1); //таймер через 10 секунд совершает действия в actionlistener
+    Timer block_timer = new Timer(50,al1); //таймер через 10 секунд совершает действия в actionlistener
 
     MouseListener ML = new MouseListener() {
         @Override

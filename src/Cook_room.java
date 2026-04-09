@@ -91,6 +91,8 @@ class Cook_room extends JFrame {
             "src/image/void.png",
             "src/image/void.png",
             0, 0);
+
+
     botton arrowright = new botton("src/image/arrowright.png");
     botton arrowleft = new botton("src/image/arrowleft.png");
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
@@ -164,8 +166,8 @@ class Cook_room extends JFrame {
         if (shower._image != null) test.drawImage(shower._image, shower.x, shower.y, this);
         if (food._image != null) test.drawImage(food._image, food.x, food.y, this);
         if (game._image != null) test.drawImage(game._image, game.x, game.y, this);
-        if (Bear._image1 != null) test.drawImage(Bear._image1, 295-620,340-230, this);
-        if (Bear._image2 != null) test.drawImage(Bear._image2,400-767,694-565, this);
+        if (Bear._image1 != null) test.drawImage(Bear._image1, 250-620,340-230, this);
+        if (Bear._image2 != null) test.drawImage(Bear._image2,396-767,694-565, this);
         if (fon1._image != null) test.drawImage(fon1._image, fon1.x, fon1.y, this);
         if ( meal== 2 && cake._image != null) {
             test.drawImage(cake._image, 0, 0, this);
@@ -184,7 +186,6 @@ class Cook_room extends JFrame {
         if (arrow_room_right._image != null) test.drawImage(arrow_room_right._image, 0,0,this);
         if (arrow_room_left._image != null) test.drawImage(arrow_room_left._image, 0,0,this);
         if (exit != null) test.drawImage(exit._image, exit.x, exit.y, this);
-
 
         g.drawImage(bi,0,0,this);
 
@@ -219,8 +220,18 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==2 )
             {
                 try {cake._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                if (foodNeeds.counter-3>=0)
-                    foodNeeds.counter= foodNeeds.counter-3;
+                int i=0;
+                while(i<3 && foodNeeds.counter>0)
+                {
+                    foodNeeds.counter--;
+                    i++;
+                }
+                try {
+                    foodNeeds.updateImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                food._image = foodNeeds.image;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }
@@ -228,8 +239,18 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==3 )
             {
                 try {tea._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                if (foodNeeds.counter-2>=0)
-                    foodNeeds.counter= foodNeeds.counter-2;
+                int i=0;
+                while(i<1 && foodNeeds.counter>0)
+                {
+                    foodNeeds.counter--;
+                    i++;
+                }
+                try {
+                    foodNeeds.updateImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                food._image = foodNeeds.image;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }
@@ -237,8 +258,18 @@ class Cook_room extends JFrame {
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==4 )
             {
                 try {hot_dog._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                if (foodNeeds.counter-2>=0)
-                    foodNeeds.counter= foodNeeds.counter-2;
+                int i=0;
+                while(i<2 && foodNeeds.counter>0)
+                {
+                    foodNeeds.counter--;
+                    i++;
+                }
+                try {
+                    foodNeeds.updateImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                food._image = foodNeeds.image;
                 osn1.SaveFile(foodNeeds.counter,"test1.txt");
 
             }

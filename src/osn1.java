@@ -30,9 +30,11 @@ class osn1 extends JFrame implements KeyListener {
     botton arrow1 = new botton("src/image/arrow1.png");
     botton top = new botton("src/image/ts1.png");
     botton top2 = new botton("src/image/ts2.png");
+    botton top3 = new botton("src/image/ts3.png");
     botton hat = new botton("src/image/hat.png");
     botton hat1 = new botton("src/image/hat1.png");
     botton hat2 = new botton("src/image/hat2.png");
+    botton hat3 = new botton("src/image/hat3.png");
     botton bottom = new botton("src/image/bottom.png");
     botton shoes = new botton("src/image/shoes.png");
     botton to_return = new botton("src/image/to_return.png");
@@ -106,7 +108,10 @@ class osn1 extends JFrame implements KeyListener {
         if (i == 3 && top2._image != null) {
             test.drawImage(top2._image, 0, 0, this);
         }
-        if (i > 3 || i < 1) {
+        if (i == 4 && top3._image != null) {
+            test.drawImage(top3._image, 0, 0, this);
+        }
+        if (i > 4 || i < 1) {
             i = 1;
         }
 
@@ -119,7 +124,10 @@ class osn1 extends JFrame implements KeyListener {
         if (p == 4 && hat2._image != null) {
             test.drawImage(hat2._image, 0, -30, this);
         }
-        if (p > 4 || p < 1) {
+        if (p == 5 && hat2._image != null) {
+            test.drawImage(hat3._image, 0, -30, this);
+        }
+        if (p > 5 || p < 1) {
             p = 1;
         }
 
@@ -230,6 +238,13 @@ class osn1 extends JFrame implements KeyListener {
 
             }
             repaint();
+            if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==4 )
+            {
+                try {Bear._image1 = ImageIO.read(new File("src/image/top3.png")); }catch (IOException e) { }
+                SaveFile(4,"top.txt");
+
+            }
+            repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==1 )
             {
                 try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
@@ -248,6 +263,12 @@ class osn1 extends JFrame implements KeyListener {
             {
                 try {Bear._image2 = ImageIO.read(new File("src/image/head2.png")); }catch (IOException e) { }
                 SaveFile(3,"head.txt");
+
+            }
+            if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==5 )
+            {
+                try {Bear._image2 = ImageIO.read(new File("src/image/head3.png")); }catch (IOException e) { }
+                SaveFile(5,"head.txt");
 
             }
             repaint();

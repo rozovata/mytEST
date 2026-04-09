@@ -49,6 +49,7 @@ class bear {
         switch(CounterFile("top.txt")) {
             case 2:return "src/image/top.png";
             case 3:return "src/image/top2.png";
+            case 4:return "src/image/top3.png";
             default:return "src/image/void.png";
         }
     }
@@ -58,6 +59,7 @@ class bear {
             case 2:return "src/image/head1.png";
             case 3:return "src/image/head2.png";
             case 4:return "src/image/head.png";
+            case 5:return "src/image/head3.png";
             default:return "src/image/void.png";
         }
     }
