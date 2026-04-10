@@ -98,32 +98,7 @@ class Cook_room extends JFrame {
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
 
-    KeyListener KL = new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {
 
-        }
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
-                Bear.x -= 2;
-            }
-            if (key == KeyEvent.VK_RIGHT) {
-                Bear.x += 2;
-            }
-            if (key == KeyEvent.VK_SPACE) {
-                System.out.println("Ты нажал на мишку");
-            }
-            repaint();
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-
-        }
-    } ;
     Cook_room() throws IOException {
         sleepNeeds = new Needs("test.txt", sleepImages);
         showerNeeds = new Needs("test2.txt", showerImages);
@@ -143,7 +118,6 @@ class Cook_room extends JFrame {
 
         setSize(1920,1080);
         setVisible(true);
-        addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         my_timer.start();

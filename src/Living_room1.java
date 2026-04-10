@@ -147,33 +147,7 @@ class Living_room1 extends JFrame {
 
 
 
-    KeyListener KL = new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {
 
-        }
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
-                Bear.x -= 2;
-            }
-            if (key == KeyEvent.VK_RIGHT) {
-                Bear.x += 2;
-            }
-
-            if (key == KeyEvent.VK_SPACE) {
-                System.out.println("Ты нажал на мишку");
-            }
-            repaint();
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-
-        }
-    } ;
     Living_room1() throws IOException {
         sleepNeeds = new Needs("test.txt", sleepImages);
         showerNeeds = new Needs("test2.txt", showerImages);
@@ -193,7 +167,6 @@ class Living_room1 extends JFrame {
 
         setSize(1920,1080);
         setVisible(true);
-        addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         my_timer.start();

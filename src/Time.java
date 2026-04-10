@@ -84,10 +84,10 @@ public class Time {
                 t++;
             }
         }
-        if (duration>=0 && duration<4 )
+        if (duration>=2 && duration<4 )
         {
             y=0;
-            while (t!=4 && y!=2)
+            while (t!=4 && y!=1)
             {
                 y++;
                 t++;

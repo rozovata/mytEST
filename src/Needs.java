@@ -84,6 +84,19 @@ public class Needs {
         return "src/image/void.png"; // fallback
     }
 
+    public boolean Death()
+    {
+        boolean fl = false;
+        int count=CounterFromFile();
+        if (count==4)
+        {
+            fl=true;
+        }
+        return fl;
+    }
+
+
+
 
 
 }
