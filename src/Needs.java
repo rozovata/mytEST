@@ -84,7 +84,7 @@ public class Needs {
         return "src/image/void.png"; // fallback
     }
 
-    public boolean Death()
+    public boolean Death1()
     {
         boolean fl = false;
         int count=CounterFromFile();
@@ -94,6 +94,19 @@ public class Needs {
         }
         return fl;
     }
+    public static boolean  Death2( Needs sleep, Needs shower, Needs food, Needs game)
+    {
+        boolean fl1 = sleep.Death1();
+        boolean fl2 = shower.Death1();
+        boolean fl3 = food.Death1();
+        boolean fl4 = game.Death1();
+        boolean fl = false;
+        if (fl1 && fl2 && fl3 && fl4)
+        {
+            fl=true;
+        }
+        return fl;
+    };
 
 
 

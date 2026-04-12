@@ -91,13 +91,37 @@ class Cook_room extends JFrame {
             "src/image/void.png",
             "src/image/void.png",
             0, 0);
-
-
     botton arrowright = new botton("src/image/arrowright.png");
     botton arrowleft = new botton("src/image/arrowleft.png");
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
 
+
+    int death = Living_room1.death;
+    ActionListener al2 = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ee) {
+            if (death!=1) {
+                if (Needs.Death2(sleepNeeds, showerNeeds, foodNeeds, gameNeeds))
+                    death += 1;
+                else
+                    death = 0;
+            }
+            else
+            {
+                death = 0;
+                try {
+                    new Death();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                my_timer.stop();
+                timer_death.stop();
+                dispose();
+            }
+        }
+    };
+    Timer timer_death  = new Timer(10000,al2);
 
     Cook_room() throws IOException {
         sleepNeeds = new Needs("test.txt", sleepImages);
@@ -121,6 +145,7 @@ class Cook_room extends JFrame {
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         my_timer.start();
+        timer_death.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -254,6 +279,7 @@ class Cook_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
+                    timer_death.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -266,6 +292,7 @@ class Cook_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
+                    timer_death.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -274,11 +301,6 @@ class Cook_room extends JFrame {
             }
 
         }
-
-
-
-
-
         @Override
         public void mousePressed(MouseEvent e) {
         }
