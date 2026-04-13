@@ -37,16 +37,14 @@ public class Time {
     public static int Duration() throws FileNotFoundException {
         LocalDateTime end = ReadTime();
         LocalDateTime now = LocalDateTime.now();
-        Time.SaveTime(now);
-        // Вычисляем разницу
+        /*Time.SaveTime(now);
+        // Вычисляем разницу*/
         Duration duration = Duration.between(end, now);
         return Math.toIntExact(duration.toHours());//вернет сколько часов прошло
     }
     public static int Duration2() throws FileNotFoundException {
         LocalDateTime end = ReadTime();
         LocalDateTime now = LocalDateTime.now();
-        Time.SaveTime(now);
-        // Вычисляем разницу
         Duration duration = Duration.between(end, now);
         return Math.toIntExact(duration.toMinutes());//вернет сколько минут прошло
     }
@@ -54,11 +52,11 @@ public class Time {
         int duration = Time.Duration2();
         int t = need.CounterFromFile();
         int y=0;
-        if (duration>=60)
+        if (duration>=12*60)
         {
             return 1;
         }
-        if (duration>=12)
+        if (duration>=120)
         {
             while (t!=4 && y!=4)
             {
@@ -66,7 +64,7 @@ public class Time {
                 t++;
             }
         }
-        if (duration>=8 && duration<12 )
+        if (duration>=60 && duration<120 )
         {
             y=0;
             while (t!=4 && y!=3)
@@ -75,7 +73,7 @@ public class Time {
                 t++;
             }
         }
-        if (duration>=4 && duration<8 )
+        if (duration>=30 && duration<60 )
         {
             y=0;
             while (t!=4 && y!=2)
@@ -84,7 +82,7 @@ public class Time {
                 t++;
             }
         }
-        if (duration>=2 && duration<4 )
+        if (duration>=1 && duration<30 )
         {
             y=0;
             while (t!=4 && y!=1)

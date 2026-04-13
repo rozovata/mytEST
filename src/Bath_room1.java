@@ -83,33 +83,6 @@ class Bath_room1 extends JFrame {
 
     Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
 
-    int death = Living_room1.death;
-    ActionListener al2 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (death!=1) {
-                if (Needs.Death2(sleepNeeds, showerNeeds, foodNeeds, gameNeeds))
-                    death += 1;
-                else
-                    death = 0;
-            }
-            else
-            {
-                death = 0;
-                try {
-                    new Death();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                my_timer.stop();
-                timer_death.stop();
-                timerbath.stop();
-                dispose();
-            }
-        }
-    };
-    Timer timer_death  = new Timer(10000,al2);
-
     int bath=0;
     ActionListener al1 = new ActionListener() {
         @Override
@@ -199,7 +172,7 @@ class Bath_room1 extends JFrame {
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         my_timer.start();
-        timer_death.start();
+        timer_death1.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -238,13 +211,7 @@ class Bath_room1 extends JFrame {
         public void mouseClicked(MouseEvent qwerty) {
             if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
             {
-                try {
-                    Needs.CounteSaveFile2(1,"rooms.txt");
-                    Time.SaveTime(LocalDateTime.now());
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-                System.exit(0);
+                Living_room1.exit();
 
             }
             if (qwerty.getX() >= 0 && qwerty.getX() <= 950 && qwerty.getY() >= 500 && qwerty.getY() <= 1080) {
@@ -256,7 +223,7 @@ class Bath_room1 extends JFrame {
             if (qwerty.getX() >= 1130 && qwerty.getX() <= 1385 && qwerty.getY() >= 245 && qwerty.getY() <= 600) {
                 my_timer.stop();
                 timerbath.stop();
-                timer_death.stop();
+                timer_death1.stop();
                 new osn1();
                 dispose();
 
@@ -269,7 +236,7 @@ class Bath_room1 extends JFrame {
                     Rooms.room_next(n);
                     my_timer.stop();
                     timerbath.stop();
-                    timer_death.stop();
+                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -283,7 +250,7 @@ class Bath_room1 extends JFrame {
                     Rooms.room_next(n);
                     my_timer.stop();
                     timerbath.stop();
-                    timer_death.stop();
+                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -310,4 +277,22 @@ class Bath_room1 extends JFrame {
 
         }
     };
+    ActionListener al3 = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ee) {
+            if (Needs.res(sleepNeeds,showerNeeds,foodNeeds,gameNeeds,"sleep_death.txt","shower_death.txt","food_death.txt", "game_death.txt")) {
+                try {
+                    new Death();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                timerbath.stop();
+                my_timer.stop();
+                timer_death1.stop();
+                dispose();
+            }
+
+        }
+    };
+    Timer timer_death1  = new Timer(10000/2,al3);
 }

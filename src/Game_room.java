@@ -91,32 +91,6 @@ class Game_room extends JFrame {
             bear.boots(),
             0, 0);
 
-    int death = Living_room1.death;
-    ActionListener al2 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (death!=1) {
-                if (Needs.Death2(sleepNeeds, showerNeeds, foodNeeds, gameNeeds))
-                    death += 1;
-                else
-                    death = 0;
-            }
-            else
-            {
-                death = 0;
-                try {
-                    new Death();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                my_timer.stop();
-                timer_death.stop();
-                dispose();
-            }
-        }
-    };
-    Timer timer_death  = new Timer(10000,al2);
-
     Game_room() throws IOException {
         sleepNeeds = new Needs("test.txt", sleepImages);
         showerNeeds = new Needs("test2.txt", showerImages);
@@ -139,7 +113,7 @@ class Game_room extends JFrame {
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
         my_timer.start();
-        timer_death.start();
+        timer_death1.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -181,13 +155,7 @@ class Game_room extends JFrame {
         public void mouseClicked(MouseEvent qwerty) {
             if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
             {
-                try {
-                    Needs.CounteSaveFile2(1,"rooms.txt");
-                    Time.SaveTime(LocalDateTime.now());
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-                System.exit(0);
+                Living_room1.exit();
 
             }
             boolean n = false;
@@ -196,7 +164,7 @@ class Game_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    timer_death.stop();
+                   timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -209,7 +177,7 @@ class Game_room extends JFrame {
                 try {
                     Rooms.room_next(n);
                     my_timer.stop();
-                    timer_death.stop();
+                   timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -220,7 +188,7 @@ class Game_room extends JFrame {
             {
                 try {
                     my_timer.stop();
-                    timer_death.stop();
+                    timer_death1.stop();
                     new Game_fly();
                     dispose();
 
@@ -232,7 +200,7 @@ class Game_room extends JFrame {
             {
                 try {
                     my_timer.stop();
-                    timer_death.stop();
+                    timer_death1.stop();
                     new Game_gift();
                     dispose();
 
@@ -260,6 +228,23 @@ class Game_room extends JFrame {
 
         }
     };
+    ActionListener al3 = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ee) {
+            if (Needs.res(sleepNeeds,showerNeeds,foodNeeds,gameNeeds,"sleep_death.txt","shower_death.txt","food_death.txt", "game_death.txt")) {
+                try {
+                    new Death();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                my_timer.stop();
+                timer_death1.stop();
+                dispose();
+            }
+
+        }
+    };
+    Timer timer_death1  = new Timer(10000/2,al3);
 }
 
 

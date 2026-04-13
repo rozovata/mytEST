@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -119,7 +120,7 @@ public class g extends JFrame {
     };
 
 
-    g() {
+    g() throws FileNotFoundException {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -128,11 +129,16 @@ public class g extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
 
+        fiile();
+
+        int t1 = Time.NeedsTime(sleepNeeds);
+        int t2 = Time.NeedsTime(showerNeeds);
+        int t3 = Time.NeedsTime(gameNeeds);
+        int t4 = Time.NeedsTime(foodNeeds);
+
+
         try {
-            if(Time.NeedsTime(foodNeeds)==1 ||
-            Time.NeedsTime(sleepNeeds)==1 ||
-            Time.NeedsTime(showerNeeds)==1 ||
-            Time.NeedsTime(gameNeeds)==1)
+            if(t1==1 || t2==1 || t3==1 || t4==1)
             {
                 new Death();
                 dispose();
@@ -166,9 +172,29 @@ public class g extends JFrame {
     }
 
     //"C:TATIANA/Users/Tom/IdeaProjects/my_game/5438484227139173417.jpg"
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         g w=new g();
 
+    }
+    private static void fiile()
+    {
+        try {
+            if (!new File("test.txt").exists()) new File("test.txt").createNewFile();
+            if (!new File("test1.txt").exists()) new File("test1.txt").createNewFile();
+            if (!new File("test2.txt").exists()) new File("test2.txt").createNewFile();
+            if (!new File("test3.txt").exists()) new File("test3.txt").createNewFile();
+            if (!new File("top.txt").exists()) new File("top.txt").createNewFile();
+            if (!new File("trousers.txt").exists()) new File("trousers.txt").createNewFile();
+            if (!new File("head.txt").exists()) new File("head.txt").createNewFile();
+            if (!new File("boots.txt").exists()) new File("boots.txt").createNewFile();
+            if (!new File("time.txt").exists()) new File("time.txt").createNewFile();
+            if (!new File("rooms.txt").exists()) new File("rooms.txt").createNewFile();
+            if (!new File("food_death.txt").exists()) new File("food_death.txt").createNewFile();
+            if (!new File("game_death.txt").exists()) new File("game_death.txt").createNewFile();
+            if (!new File("shower_death.txt").exists()) new File("shower_death.txt").createNewFile();
+            if (!new File("sleep_death.txt").exists()) new File("sleep_death.txt").createNewFile();
+
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
 

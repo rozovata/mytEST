@@ -56,122 +56,7 @@ class osn1 extends JFrame implements KeyListener {
         addMouseListener(ML);
         bi = new BufferedImage(1920,1080,BufferedImage.TYPE_INT_RGB);
     }
-    public void paint(Graphics g) {
-        if (bi == null) {
-            bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        }
 
-        Graphics2D test = bi.createGraphics();
-
-        // Очищаем буфер БЕЛЫМ цветом
-        test.setColor(Color.WHITE);
-        test.fillRect(0, 0, getWidth(), getHeight());
-
-
-        // Рисуем все картинки с проверками
-        if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
-        if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
-        if (Bear._image1 != null) test.drawImage(Bear._image1, Bear.x, Bear.y, this);
-        if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
-        if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
-        if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
-        if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
-        if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
-        if (panel._image != null) test.drawImage(panel._image, panel.x, panel.y, this);
-        //if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
-        //if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
-
-        if (pole._image != null) {
-            test.drawImage(pole._image, 0, 0, this);
-            test.drawImage(pole._image, 0, 200, this);
-            test.drawImage(pole._image, 0, 400, this);
-            test.drawImage(pole._image, 0, 600, this);
-        }
-
-        if (arrow._image != null) {
-            test.drawImage(arrow._image, 0, 0, this);
-            test.drawImage(arrow._image, 0, 200, this);
-            test.drawImage(arrow._image, 0, 400, this);
-            test.drawImage(arrow._image, 0, 600, this);
-        }
-
-        if (arrow1._image != null) {
-            test.drawImage(arrow1._image, 0, 0, this);
-            test.drawImage(arrow1._image, 0, 200, this);
-            test.drawImage(arrow1._image, 0, 400, this);
-            test.drawImage(arrow1._image, 0, 600, this);
-        }
-
-        if (i == 2 && top._image != null) {
-            test.drawImage(top._image, 0, 0, this);
-        }
-        if (i == 3 && top2._image != null) {
-            test.drawImage(top2._image, 0, 0, this);
-        }
-        if (i == 4 && top3._image != null) {
-            test.drawImage(top3._image, 0, 0, this);
-        }
-        if (i > 4 || i < 1) {
-            i = 1;
-        }
-
-        if (p == 2 && hat._image != null) {
-            test.drawImage(hat._image, 0, -30, this);
-        }
-        if (p == 3 && hat1._image != null) {
-            test.drawImage(hat1._image, 0, -30, this);
-        }
-        if (p == 4 && hat2._image != null) {
-            test.drawImage(hat2._image, 0, -30, this);
-        }
-        if (p == 5 && hat2._image != null) {
-            test.drawImage(hat3._image, 0, -30, this);
-        }
-        if (p > 5 || p < 1) {
-            p = 1;
-        }
-
-        if (l == 2 && bottom._image != null) {
-            test.drawImage(bottom._image, 0, -50, this);
-        }
-        if (l > 2 || l < 1) {
-            l = 1;
-        }
-
-        if (m == 2 && shoes._image != null) {
-            test.drawImage(shoes._image, 0, -70, this);
-        }
-        if (m > 2 || m < 1) {
-            m = 1;
-        }
-        test.dispose();
-        g.drawImage(bi, 0, 0, this);
-    }
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_LEFT) {
-            Bear.x -= 2;
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            Bear.x += 2;
-        }
-        if (key == KeyEvent.VK_SPACE) {
-            System.out.println("Ты нажал на мишку");
-        }
-        repaint();
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 
     MouseListener ML = new MouseListener() {
         @Override
@@ -356,10 +241,129 @@ class osn1 extends JFrame implements KeyListener {
 
         }
     };
+
+    public void paint(Graphics g) {
+        if (bi == null) {
+            bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        }
+
+        Graphics2D test = bi.createGraphics();
+
+        // Очищаем буфер белым цветом
+        test.setColor(Color.WHITE);
+        test.fillRect(0, 0, getWidth(), getHeight());
+
+
+        // Рисуем все картинки с проверками
+        if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
+        if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
+        if (Bear._image1 != null) test.drawImage(Bear._image1, Bear.x, Bear.y, this);
+        if (Bear._image2 != null) test.drawImage(Bear._image2, Bear.x, Bear.y, this);
+        if (Bear._image3 != null) test.drawImage(Bear._image3, Bear.x, Bear.y, this);
+        if (Bear._image4 != null) test.drawImage(Bear._image4, Bear.x, Bear.y, this);
+        if (no._image != null) test.drawImage(no._image, no.x, no.y, this);
+        if (yes._image != null) test.drawImage(yes._image, yes.x, yes.y, this);
+        if (panel._image != null) test.drawImage(panel._image, panel.x, panel.y, this);
+        //if (name._image != null) test.drawImage(name._image, name.x, name.y, this);
+        //if (to_return._image != null) test.drawImage(to_return._image, 0,0,this);
+
+        if (pole._image != null) {
+            test.drawImage(pole._image, 0, 0, this);
+            test.drawImage(pole._image, 0, 200, this);
+            test.drawImage(pole._image, 0, 400, this);
+            test.drawImage(pole._image, 0, 600, this);
+        }
+
+        if (arrow._image != null) {
+            test.drawImage(arrow._image, 0, 0, this);
+            test.drawImage(arrow._image, 0, 200, this);
+            test.drawImage(arrow._image, 0, 400, this);
+            test.drawImage(arrow._image, 0, 600, this);
+        }
+
+        if (arrow1._image != null) {
+            test.drawImage(arrow1._image, 0, 0, this);
+            test.drawImage(arrow1._image, 0, 200, this);
+            test.drawImage(arrow1._image, 0, 400, this);
+            test.drawImage(arrow1._image, 0, 600, this);
+        }
+
+        if (i > 4 ) {
+            i = 1;
+        }
+        if ( i < 1) {
+            i = 4;
+        }
+        if (i == 2 && top._image != null) {
+            test.drawImage(top._image, 0, 0, this);
+        }
+        if (i == 3 && top2._image != null) {
+            test.drawImage(top2._image, 0, 0, this);
+        }
+        if (i == 4 && top3._image != null) {
+            test.drawImage(top3._image, 0, 0, this);
+        }
+
+        if (p > 5 ) {
+            p = 1;
+        }
+        if ( p < 1) {
+            p = 5;
+        }
+        if (p == 2 && hat._image != null) {
+            test.drawImage(hat._image, 0, -30, this);
+        }
+        if (p == 3 && hat1._image != null) {
+            test.drawImage(hat1._image, 0, -30, this);
+        }
+        if (p == 4 && hat2._image != null) {
+            test.drawImage(hat2._image, 0, -30, this);
+        }
+        if (p == 5 && hat2._image != null) {
+            test.drawImage(hat3._image, 0, -30, this);
+        }
+
+        if (l > 2 ) {
+            l = 1;
+        }
+        if ( l < 1) {
+            l = 2;
+        }
+        if (l == 2 && bottom._image != null) {
+            test.drawImage(bottom._image, 0, -50, this);
+        }
+
+        if (m > 2 ) {
+            m = 1;
+        }
+        if ( m < 1) {
+            m = 2;
+        }
+        if (m == 2 && shoes._image != null) {
+            test.drawImage(shoes._image, 0, -70, this);
+        }
+        test.dispose();
+        g.drawImage(bi, 0, 0, this);
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
     public static void SaveFile(int counter, String filePath) {
         try (FileWriter fileWriter = new FileWriter(filePath);) {//чтобы не закрывать поток
             fileWriter.write(String.valueOf(counter));//запишет не символ по номеру, а сам текст
-            fileWriter.flush();  // ← ПРИНУДИТЕЛЬНАЯ запись!
+            fileWriter.flush();  //  запись
         } catch (IOException a) {
             throw new RuntimeException(a);
         }

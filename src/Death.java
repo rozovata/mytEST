@@ -105,7 +105,11 @@ class Death extends JFrame {
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            new g();
+            try {
+                new g();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             dispose();
 
         }

@@ -19,8 +19,6 @@ public class Rooms {
             } else { // движение назад
                 nextRoom = (room == 1) ? 4 : room - 1;
             }
-
-            // ЗАПИСЫВАЕМ результат в файл:
             fileWriter.write(String.valueOf(nextRoom));
             fileWriter.flush();
         }

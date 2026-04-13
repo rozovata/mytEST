@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
 
+
 public class Needs {
     BufferedImage image;
     public String filePath;
@@ -23,6 +24,18 @@ public class Needs {
     public int CounterFromFile() {
         File f = new File(filePath);
 
+        try (Scanner s = new Scanner(f)) {
+            if (s.hasNext()) {
+                String text = s.next();
+                return text.charAt(0) - '0';
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public static int CounterFromFile2(String filePath) {
+        File f = new File(filePath);
         try (Scanner s = new Scanner(f)) {
             if (s.hasNext()) {
                 String text = s.next();
@@ -107,9 +120,57 @@ public class Needs {
         }
         return fl;
     };
-
-
-
+    public static boolean need_death(Needs need, String file)
+    {
+        boolean y = false;
+        int death = Needs.CounterFromFile2(file);
+        if (death<6) {
+            if (need.Death1())
+                death++;
+            else
+                death = 0;
+        }
+        else
+        {
+            death = 0;
+            y=true;
+        }
+        System.out.println(death);
+        CounteSaveFile2(death, file);
+        return y;
+    }
+    public static boolean res(Needs need1,Needs need2, Needs need3, Needs need4, String t1, String t2, String t3, String t4)
+    {
+        if(need_death(need1, t1))
+        {
+            CounteSaveFile2(0, t1);
+            CounteSaveFile2(0, t2);
+            CounteSaveFile2(0, t3);
+            CounteSaveFile2(0, t4);
+            return true;}
+        if(need_death(need2, t2))
+        {
+            CounteSaveFile2(0, t1);
+            CounteSaveFile2(0, t2);
+            CounteSaveFile2(0, t3);
+            CounteSaveFile2(0, t4);
+            return true;}
+        if(need_death(need3, t3))
+        {
+            CounteSaveFile2(0, t1);
+            CounteSaveFile2(0, t2);
+            CounteSaveFile2(0, t3);
+            CounteSaveFile2(0, t4);
+            return true;}
+        if(need_death(need4, t4))
+        {
+            CounteSaveFile2(0, t1);
+            CounteSaveFile2(0, t2);
+            CounteSaveFile2(0, t3);
+            CounteSaveFile2(0, t4);
+            return true;}
+        return false;
+    }
 
 
 }
