@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class g extends JFrame {
     // Инициализируем
@@ -26,14 +28,14 @@ public class g extends JFrame {
             "src/image/shower4.png",
             "src/image/shower5.png"
     };
-    static String [] foodImages = {
+    static String[] foodImages = {
             "src/image/food1.png",
             "src/image/food2.png",
             "src/image/food3.png",
             "src/image/food4.png",
             "src/image/food5.png"
     };
-    static String [] gameImages = {
+    static String[] gameImages = {
             "src/image/game1.png",
             "src/image/game2.png",
             "src/image/game3.png",
@@ -49,13 +51,14 @@ public class g extends JFrame {
         try {
             sleepNeeds = new Needs("test.txt", sleepImages);
             showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages );
-            gameNeeds = new Needs("test3.txt", gameImages );
+            foodNeeds = new Needs("test1.txt", foodImages);
+            gameNeeds = new Needs("test3.txt", gameImages);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    KeyListener KL=new KeyListener() {
+
+    KeyListener KL = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
 
@@ -69,12 +72,11 @@ public class g extends JFrame {
         @Override
         public void keyReleased(KeyEvent e) {
         }
-    } ;
+    };
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
-            if (qwerty.getX() >= 665 && qwerty.getX()<= 1280 && qwerty.getY() >= 334 && qwerty.getY()<= 334+598-483 )
-            {
+            if (qwerty.getX() >= 665 && qwerty.getX() <= 1280 && qwerty.getY() >= 334 && qwerty.getY() <= 334 + 598 - 483) {
                 try {
                     new Living_room1();
                 } catch (IOException e) {
@@ -82,12 +84,10 @@ public class g extends JFrame {
                 }
                 dispose();
             }
-            if (qwerty.getX() >= 665 && qwerty.getX()<= 1280 && qwerty.getY() >= 634 && qwerty.getY()<= 634+598-483 )
-            {
+            if (qwerty.getX() >= 665 && qwerty.getX() <= 1280 && qwerty.getY() >= 634 && qwerty.getY() <= 634 + 598 - 483) {
                 System.exit(0);
             }
-            if (qwerty.getX() >= 665 && qwerty.getX()<= 1280 && qwerty.getY() >= 482 && qwerty.getY()<= 600 )
-            {
+            if (qwerty.getX() >= 665 && qwerty.getX() <= 1280 && qwerty.getY() >= 482 && qwerty.getY() <= 600) {
                 try {
                     new Setting_text();
                 } catch (IOException e) {
@@ -138,8 +138,7 @@ public class g extends JFrame {
 
 
         try {
-            if(t1==1 || t2==1 || t3==1 || t4==1)
-            {
+            if (t1 == 1 || t2 == 1 || t3 == 1 || t4 == 1) {
                 new Death();
                 dispose();
             }
@@ -150,15 +149,15 @@ public class g extends JFrame {
             throw new RuntimeException(e);
         }
     }
+
     character fon = new character("src/image/fon_start.png", 0, 0);
     character setting = new character("src/image/setting.png", 0, 0);
-    character play = new character("src/image/play.png",0,0);
-    character exit = new character("src/image/exit.png",0,0);
+    character play = new character("src/image/play.png", 0, 0);
+    character exit = new character("src/image/exit.png", 0, 0);
 
-    BufferedImage  bi;
+    BufferedImage bi;
 
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         if (bi == null) {
             bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         }
@@ -168,36 +167,82 @@ public class g extends JFrame {
         if (play._image != null) test.drawImage(play._image, play.x, play.y, this);
         if (exit._image != null) test.drawImage(exit._image, exit.x, exit.y, this);
 
-        g.drawImage(bi,0,0,this);
+        g.drawImage(bi, 0, 0, this);
     }
 
     //"C:TATIANA/Users/Tom/IdeaProjects/my_game/5438484227139173417.jpg"
     public static void main(String[] args) throws FileNotFoundException {
-        g w=new g();
+        g w = new g();
 
     }
-    private static void fiile()
-    {
+
+    private static void fiile() {
         try {
-            if (!new File("test.txt").exists()) new File("test.txt").createNewFile();
-            if (!new File("test1.txt").exists()) new File("test1.txt").createNewFile();
-            if (!new File("test2.txt").exists()) new File("test2.txt").createNewFile();
-            if (!new File("test3.txt").exists()) new File("test3.txt").createNewFile();
-            if (!new File("top.txt").exists()) new File("top.txt").createNewFile();
-            if (!new File("trousers.txt").exists()) new File("trousers.txt").createNewFile();
-            if (!new File("head.txt").exists()) new File("head.txt").createNewFile();
-            if (!new File("boots.txt").exists()) new File("boots.txt").createNewFile();
-            if (!new File("time.txt").exists()) new File("time.txt").createNewFile();
-            if (!new File("rooms.txt").exists()) new File("rooms.txt").createNewFile();
-            if (!new File("food_death.txt").exists()) new File("food_death.txt").createNewFile();
-            if (!new File("game_death.txt").exists()) new File("game_death.txt").createNewFile();
-            if (!new File("shower_death.txt").exists()) new File("shower_death.txt").createNewFile();
-            if (!new File("sleep_death.txt").exists()) new File("sleep_death.txt").createNewFile();
+            if (!new File("test.txt").exists()) {
+                new File("test.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "test.txt");
+            }
+            if (!new File("test1.txt").exists()) {
+                new File("test1.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "test1.txt");
+            }
+            if (!new File("test2.txt").exists()) {
+                new File("test2.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "test2.txt");
+            }
+            if (!new File("test3.txt").exists()) {
+                new File("test3.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "test3.txt");
+            }
+            if (!new File("top.txt").exists()) {
+                new File("top.txt").createNewFile();
+                Needs.CounteSaveFile2(1, "top.txt");
+            }
+            if (!new File("trousers.txt").exists()) {
+                new File("trousers.txt").createNewFile();
+                Needs.CounteSaveFile2(1, "trousers.txt");
+            }
+            if (!new File("head.txt").exists()) {
+                new File("head.txt").createNewFile();
+                Needs.CounteSaveFile2(1, "head.txt");
+            }
+            if (!new File("boots.txt").exists()) {
+                new File("boots.txt").createNewFile();
+                Needs.CounteSaveFile2(1, "boots.txt");
+            }
+            if (!new File("time.txt").exists()) {
+                new File("time.txt").createNewFile();
+                LocalDateTime now = LocalDateTime.now();
+                Time.SaveTime(now);
+            }
+            if (!new File("rooms.txt").exists()) {
+                new File("rooms.txt").createNewFile();
+                Needs.CounteSaveFile2(1, "rooms.txt");
+            }
+            if (!new File("food_death.txt").exists()) {
+                new File("food_death.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "food_death.txt");
+            }
+            if (!new File("game_death.txt").exists()) {
+                new File("game_death.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "game_death.txt");
+            }
+            if (!new File("shower_death.txt").exists()) {
+                new File("shower_death.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "shower_death.txt");
+            }
+            if (!new File("sleep_death.txt").exists()) {
+                new File("sleep_death.txt").createNewFile();
+                Needs.CounteSaveFile2(0, "sleep_death.txt");
+            }
 
-        } catch (IOException e) { e.printStackTrace(); }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
-
-
 }
 
 
