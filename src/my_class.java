@@ -22,7 +22,7 @@ public class my_class extends  JPanel{//Main {
             //g2d.clearRect(0,0,600,400);
         Image my_image;
         try {
-            my_image = ImageIO.read(new File("H:/ros/me_1project/my2/Мишка.png/"));
+            my_image = ImageIO.read(getClass().getResourceAsStream("H:/ros/me_1project/my2/Мишка.png/"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -13,7 +13,7 @@ class Player
     {
         x = x_;
         y = y_;
-        try {image = ImageIO.read(new File(s)); }catch (IOException e) { }
+        try {image = ImageIO.read(getClass().getResourceAsStream(s)); }catch (IOException e) { }
     }
     public boolean bam (Rectangle temp)
     {

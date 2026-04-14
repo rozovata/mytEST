@@ -90,11 +90,11 @@ class Bath_room1 extends JFrame {
             if (bath<=3 && bath!=0)
             {
 
-                try {Bear._image = ImageIO.read(new File("src/image/bearbath.png")); }catch (IOException e) { }
-                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
-                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image = ImageIO.read(getClass().getResourceAsStream("src/image/bearbath.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image3 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image4 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
 
                 bath++;
                 try (FileWriter fileWriter = new FileWriter(showerNeeds.filePath)){
@@ -125,11 +125,11 @@ class Bath_room1 extends JFrame {
                 timerbath.stop();
                 bath =0;
                 try {
-                    Bear._image = ImageIO.read(new File("src/image/bear.png"));
-                    Bear._image1 = ImageIO.read(new File(bear.head()));
-                    Bear._image2 = ImageIO.read(new File(bear.top()));
-                    Bear._image3 = ImageIO.read(new File(bear.trousers()));
-                    Bear._image4 = ImageIO.read(new File(bear.boots()));
+                    Bear._image = ImageIO.read(getClass().getResourceAsStream("src/image/bear.png"));
+                    Bear._image1 = ImageIO.read(getClass().getResourceAsStream(bear.head()));
+                    Bear._image2 = ImageIO.read(getClass().getResourceAsStream(bear.top()));
+                    Bear._image3 = ImageIO.read(getClass().getResourceAsStream(bear.trousers()));
+                    Bear._image4 = ImageIO.read(getClass().getResourceAsStream(bear.boots()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

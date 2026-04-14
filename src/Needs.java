@@ -68,7 +68,7 @@ public class Needs {
     //Загружает картинку для текущего состояния
     public void updateImage() throws IOException {
         if(images != null && counter<images.length){
-            this.image=ImageIO.read(new File(images[counter]));
+            this.image=ImageIO.read(getClass().getResourceAsStream(images[counter]));
         }
     }
 

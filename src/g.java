@@ -13,50 +13,9 @@ import java.time.format.DateTimeFormatter;
 
 public class g extends JFrame {
     // Инициализируем
-    static String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
 
-    static String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    static String[] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    static String[] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-    static Needs sleepNeeds;
-    static Needs showerNeeds;
-    static Needs foodNeeds;
-    static Needs gameNeeds;
 
-    static {
-        try {
-            sleepNeeds = new Needs("test.txt", sleepImages);
-            showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages);
-            gameNeeds = new Needs("test3.txt", gameImages);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     KeyListener KL = new KeyListener() {
         @Override
@@ -121,6 +80,48 @@ public class g extends JFrame {
 
 
     g() throws FileNotFoundException {
+         String[] sleepImages = {
+                "src/image/sleep1.png",
+                "src/image/sleep2.png",
+                "src/image/sleep3.png",
+                "src/image/sleep4.png",
+                "src/image/sleep5.png"
+        };
+
+         String[] showerImages = {
+                "src/image/shower1.png",
+                "src/image/shower2.png",
+                "src/image/shower3.png",
+                "src/image/shower4.png",
+                "src/image/shower5.png"
+        };
+         String[] foodImages = {
+                "src/image/food1.png",
+                "src/image/food2.png",
+                "src/image/food3.png",
+                "src/image/food4.png",
+                "src/image/food5.png"
+        };
+         String[] gameImages = {
+                "src/image/game1.png",
+                "src/image/game2.png",
+                "src/image/game3.png",
+                "src/image/game4.png",
+                "src/image/game5.png"
+        };
+         Needs sleepNeeds= null;
+         Needs showerNeeds = null;
+         Needs foodNeeds = null;
+         Needs gameNeeds= null;
+            try {
+                sleepNeeds = new Needs("test.txt", sleepImages);
+                showerNeeds = new Needs("test2.txt", showerImages);
+                foodNeeds = new Needs("test1.txt", foodImages);
+                gameNeeds = new Needs("test3.txt", gameImages);
+            } catch (IOException e) {
+                System.out.println("поля пустые");
+            }
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -129,7 +130,7 @@ public class g extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
 
-        fiile();
+
 
         int t1 = Time.NeedsTime(sleepNeeds);
         int t2 = Time.NeedsTime(showerNeeds);
@@ -172,6 +173,7 @@ public class g extends JFrame {
 
     //"C:TATIANA/Users/Tom/IdeaProjects/my_game/5438484227139173417.jpg"
     public static void main(String[] args) throws FileNotFoundException {
+        fiile();
         g w = new g();
 
     }
@@ -237,10 +239,9 @@ public class g extends JFrame {
             }
 
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println("Вы впервый раз в игре");
         }
-
 
     }
 }
@@ -292,8 +293,8 @@ public class work extends JFrame
     {
         setSize(500,500);
         setVisible(true);
-        _image= Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/my2/src/im.jpg");
-        fon=Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/my2/src/Фон.jpg");
+        _image= Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/my2//im.jpg");
+        fon=Toolkit.getDefaultToolkit().createImage("H:/ros/me_1project/my2//Фон.jpg");
     }
 
 
@@ -307,7 +308,7 @@ public class work extends JFrame
 
 
 
-    //"H:/ros/me_1project/my2/src/im.jpg"
+    //"H:/ros/me_1project/my2//im.jpg"
     public static void main(String[] args) {
         work w=new work();
 

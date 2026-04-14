@@ -188,7 +188,7 @@ class Cook_room extends JFrame {
             repaint();
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==2 )
             {
-                try {cake._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {cake._image = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 int i=0;
                 while(i<3 && foodNeeds.counter>0)
                 {
@@ -207,7 +207,7 @@ class Cook_room extends JFrame {
             repaint();
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==3 )
             {
-                try {tea._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {tea._image = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 int i=0;
                 while(i<1 && foodNeeds.counter>0)
                 {
@@ -226,7 +226,7 @@ class Cook_room extends JFrame {
             repaint();
             if (qwerty.getX() >= 720 && qwerty.getX()<= 1200 && qwerty.getY() >= 630 && qwerty.getY()<= 1010 && meal==4 )
             {
-                try {hot_dog._image = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {hot_dog._image = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 int i=0;
                 while(i<2 && foodNeeds.counter>0)
                 {

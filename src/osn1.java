@@ -16,7 +16,7 @@ class osn1 extends JFrame implements KeyListener {
     character fon = new character("src/image/fon1.png", 0, 0);
 
     character no = new character("src/image/no.png", 0, 0);
-    bear Bear = new bear("src/image/Bear.png",
+    bear Bear = new bear("src/image/bear.png",
             bear.top(),
             bear.head(),
             bear.trousers(),
@@ -111,97 +111,97 @@ class osn1 extends JFrame implements KeyListener {
             repaint(1495,800,60,100);
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==2 )
             {
-                try {Bear._image1 = ImageIO.read(new File("src/image/top.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/top.png")); }catch (IOException e) { }
                 SaveFile(2,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==3 )
             {
-                try {Bear._image1 = ImageIO.read(new File("src/image/top2.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/top2.png")); }catch (IOException e) { }
                 SaveFile(3,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==4 )
             {
-                try {Bear._image1 = ImageIO.read(new File("src/image/top3.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/top3.png")); }catch (IOException e) { }
                 SaveFile(4,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 183 && qwerty.getY()<= (183+165) && i==1 )
             {
-                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"top.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==2 )
             {
-                try {Bear._image2 = ImageIO.read(new File("src/image/head1.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/head1.png")); }catch (IOException e) { }
                 SaveFile(2,"head.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==3 )
             {
-                try {Bear._image2 = ImageIO.read(new File("src/image/head2.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/head2.png")); }catch (IOException e) { }
                 SaveFile(3,"head.txt");
 
             }
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==5 )
             {
-                try {Bear._image2 = ImageIO.read(new File("src/image/head3.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/head3.png")); }catch (IOException e) { }
                 SaveFile(5,"head.txt");
 
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==4 )
             {
-                try {Bear._image2 = ImageIO.read(new File("src/image/head.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/head.png")); }catch (IOException e) { }
                 SaveFile(4,"head.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 383 && qwerty.getY()<= (383+165) && p==1 )
             {
-                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"head.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 583 && qwerty.getY()<= (583+165) && l==2 )
             {
-                try {Bear._image3 = ImageIO.read(new File("src/image/trousers.png")); }catch (IOException e) { }
+                try {Bear._image3 = ImageIO.read(getClass().getResourceAsStream("src/image/trousers.png")); }catch (IOException e) { }
                 SaveFile(2,"trousers.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 583 && qwerty.getY()<= (583+165) && l==1 )
             {
-                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image3 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"trousers.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 783 && qwerty.getY()<= (783+165) && m==2 )
             {
-                try {Bear._image4 = ImageIO.read(new File("src/image/boots.png")); }catch (IOException e) { }
+                try {Bear._image4 = ImageIO.read(getClass().getResourceAsStream("src/image/boots.png")); }catch (IOException e) { }
                 SaveFile(2,"boots.txt");
             }
             repaint();
             if (qwerty.getX() >= 1550 && qwerty.getX()<= (190+1550) && qwerty.getY() >= 783 && qwerty.getY()<= (783+165) && m==1 )
             {
-                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image4 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"boots.txt");
             }
             repaint();
             if(qwerty.getX() >= 53 && qwerty.getX()<= 300 && qwerty.getY() >= 660 && qwerty.getY()<= 907 )
             {
-                try {Bear._image4 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image4 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"boots.txt");
-                try {Bear._image3 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image3 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"trousers.txt");
-                try {Bear._image2 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image2 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"head.txt");
-                try {Bear._image1 = ImageIO.read(new File("src/image/void.png")); }catch (IOException e) { }
+                try {Bear._image1 = ImageIO.read(getClass().getResourceAsStream("src/image/void.png")); }catch (IOException e) { }
                 SaveFile(1,"top.txt");
             }
             repaint();

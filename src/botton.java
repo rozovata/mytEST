@@ -7,7 +7,7 @@ import java.io.IOException;
 class botton{
     BufferedImage _image;
     botton(String s) {
-        try {_image = ImageIO.read(new File(s)); }catch (IOException e) { }
+        try {_image = ImageIO.read(getClass().getResourceAsStream(s)); }catch (IOException e) { }
     }
 
 }

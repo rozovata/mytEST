@@ -23,9 +23,9 @@ public class Blocks {
         y2 = _y2;
         y3 = _y3;
         try {
-            image1 = ImageIO.read(new File(s1));
-            image2 = ImageIO.read(new File(s2));
-            image3 = ImageIO.read(new File(s3));
+            image1 = ImageIO.read(getClass().getResourceAsStream(s1));
+            image2 = ImageIO.read(getClass().getResourceAsStream(s2));
+            image3 = ImageIO.read(getClass().getResourceAsStream(s3));
 
         } catch (IOException e) {}
     }

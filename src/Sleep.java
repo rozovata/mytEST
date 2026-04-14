@@ -13,7 +13,7 @@ public class Sleep {
         x = _x;
         y = _y;
         try {
-            _image = ImageIO.read(new File(s));
+            _image = ImageIO.read(getClass().getResourceAsStream(s));
         } catch (IOException e) {}
     }
 }

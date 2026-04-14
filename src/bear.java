@@ -17,11 +17,11 @@ class bear {
     bear(String s,String s1, String s2, String s3, String s4, int _x, int _y) {
         x = _x;
         y = _y;
-        try {_image = ImageIO.read(new File(s)); }catch (IOException e) { }
-        try {_image1 = ImageIO.read(new File(s1)); }catch (IOException e) { }
-        try {_image2 = ImageIO.read(new File(s2)); }catch (IOException e) { }
-        try {_image3 = ImageIO.read(new File(s3)); }catch (IOException e) { }
-        try {_image4 = ImageIO.read(new File(s4)); }catch (IOException e) { }
+        try {_image = ImageIO.read(getClass().getResourceAsStream(s)); }catch (IOException e) { }
+        try {_image1 = ImageIO.read(getClass().getResourceAsStream(s1)); }catch (IOException e) { }
+        try {_image2 = ImageIO.read(getClass().getResourceAsStream(s2)); }catch (IOException e) { }
+        try {_image3 = ImageIO.read(getClass().getResourceAsStream(s3)); }catch (IOException e) { }
+        try {_image4 = ImageIO.read(getClass().getResourceAsStream(s4)); }catch (IOException e) { }
 
     }
     public static int CounterFile(String filePath) {

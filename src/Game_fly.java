@@ -191,21 +191,21 @@ class Game_fly extends JFrame {
                 System.out.println("попадение");
                 if (bam==1){
                     try {
-                        red_heart1._image=ImageIO.read(new File("src/image/white_heart.png"));
+                        red_heart1._image=ImageIO.read(getClass().getResourceAsStream("src/image/white_heart.png"));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 else if (bam==2){
                     try {
-                        red_heart2._image=ImageIO.read(new File("src/image/white_heart.png"));
+                        red_heart2._image=ImageIO.read(getClass().getResourceAsStream("src/image/white_heart.png"));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 else if (bam==3){
                     try {
-                        red_heart3._image=ImageIO.read(new File("src/image/white_heart.png"));
+                        red_heart3._image=ImageIO.read(getClass().getResourceAsStream("src/image/white_heart.png"));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
