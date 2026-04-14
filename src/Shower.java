@@ -16,4 +16,4 @@ public class Shower {
             _image = ImageIO.read(getClass().getResourceAsStream(s));
         } catch (IOException e) {}
     }
-}
+}//fgh
