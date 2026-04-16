@@ -38,7 +38,7 @@ class Setting_text extends JFrame {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
             try {
-                new g();
+                new Menu();
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }

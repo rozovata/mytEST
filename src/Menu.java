@@ -9,9 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class g extends JFrame {
+public class Menu extends JFrame {
     // Инициализируем
     static String[] sleepImages = {
             "src/image/sleep1.png",
@@ -120,7 +119,7 @@ public class g extends JFrame {
     };
 
 
-    g() throws FileNotFoundException {
+    Menu() throws FileNotFoundException {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -172,7 +171,7 @@ public class g extends JFrame {
 
     //"C:TATIANA/Users/Tom/IdeaProjects/my_game/5438484227139173417.jpg"
     public static void main(String[] args) throws FileNotFoundException {
-        g w = new g();
+        Menu w = new Menu();
 
     }
 
