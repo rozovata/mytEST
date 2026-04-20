@@ -9,59 +9,6 @@ import java.time.LocalDateTime;
 class Death extends JFrame {
 
 
-
-
-    public static void main(String[] args) throws IOException {
-        Death game = new Death();
-    }
-    // Инициализируем
-    static String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
-
-    static String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    static String [] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    static String [] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-
-
-    static Needs sleepNeeds;
-    static Needs showerNeeds;
-    static Needs foodNeeds;
-    static Needs gameNeeds;
-
-    static {
-        try {
-            sleepNeeds = new Needs("test.txt", sleepImages);
-            showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages );
-            gameNeeds = new Needs("test3.txt", gameImages );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     character fon = new character("src/image/death.png", 0, 0);
     bear Bear = new bear("src/image/bear.png",
             bear.head(),
@@ -89,6 +36,21 @@ class Death extends JFrame {
         osn1.SaveFile(1,"head.txt");
         osn1.SaveFile(1,"top.txt");
         osn1.SaveFile(1,"trousers.txt");
+
+        GameManager.stopAllTimers();
+        Needs.CounteSaveFile2(0, "food_death.txt");
+        Needs.CounteSaveFile2(0, "game_death.txt");
+        Needs.CounteSaveFile2(0, "shower_death.txt");
+        Needs.CounteSaveFile2(0, "sleep_death.txt");
+
+        // Сбрасываем комнату на гостиную
+        Needs.CounteSaveFile2(1, "rooms.txt");
+
+        // Обновляем картинки в Needs (чтобы при следующем запуске были правильные)
+        GameManager.getSleepNeeds().updateImage();
+        GameManager.getShowerNeeds().updateImage();
+        GameManager.getFoodNeeds().updateImage();
+        GameManager.getGameNeeds().updateImage();
     }
 
     BufferedImage  bi;
@@ -107,7 +69,7 @@ class Death extends JFrame {
         public void mouseClicked(MouseEvent qwerty) {
             try {
                 new Menu();
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             dispose();

@@ -9,42 +9,6 @@ import java.time.LocalDateTime;
 class Bath_room1 extends JFrame {
 
 
-    public static void main(String[] args) throws IOException {
-
-        Bath_room1 game = new Bath_room1();
-    }
-    // Инициализируем
-    static String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
-
-    static String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    static String [] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    static String [] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-
-
     Needs sleepNeeds;
     Needs showerNeeds;
     Needs foodNeeds;
@@ -57,31 +21,6 @@ class Bath_room1 extends JFrame {
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
 
-
-    ActionListener al = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            try {
-                // Обновляем картинки в объектах
-
-                sleepNeeds.next();
-                showerNeeds.next();
-                foodNeeds.next();
-                gameNeeds.next();
-                sleep._image = sleepNeeds.image;
-                shower._image = showerNeeds.image;
-                food._image = foodNeeds.image;
-                game._image = gameNeeds.image;
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            repaint();
-        }
-    };
-
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
 
     int bath=0;
     ActionListener al1 = new ActionListener() {
@@ -151,16 +90,15 @@ class Bath_room1 extends JFrame {
 
 
     Bath_room1() throws IOException {
-        sleepNeeds = new Needs("test.txt", sleepImages);
-        showerNeeds = new Needs("test2.txt", showerImages);
-        foodNeeds = new Needs("test1.txt", foodImages );
-        gameNeeds = new Needs("test3.txt", gameImages );
+        sleepNeeds = GameManager.getSleepNeeds();
+        showerNeeds = GameManager.getShowerNeeds();
+        foodNeeds = GameManager.getFoodNeeds();
+        gameNeeds = GameManager.getGameNeeds();
 
-
-        sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
-        shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
-        food = new Food(foodNeeds.getCurrentImagePath(),0,0);
-        game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+        sleep = new Sleep(sleepNeeds.getCurrentImagePath(), 0, 0);
+        shower = new Shower(showerNeeds.getCurrentImagePath(), 0, 0);
+        food = new Food(foodNeeds.getCurrentImagePath(), 0, 0);
+        game = new Game(gameNeeds.getCurrentImagePath(), 0, 0);
 
         sleep._image = sleepNeeds.image;
         shower._image = showerNeeds.image;
@@ -171,8 +109,7 @@ class Bath_room1 extends JFrame {
         setVisible(true);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
-        my_timer.start();
-        timer_death1.start();
+        GameManager.setCurrentRoom(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -211,8 +148,8 @@ class Bath_room1 extends JFrame {
         public void mouseClicked(MouseEvent qwerty) {
             if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
             {
+                GameManager.stopAllTimers();
                 Living_room1.exit();
-
             }
             if (qwerty.getX() >= 0 && qwerty.getX() <= 950 && qwerty.getY() >= 500 && qwerty.getY() <= 1080) {
                 bath += 1;
@@ -221,9 +158,9 @@ class Bath_room1 extends JFrame {
                 }
             }
             if (qwerty.getX() >= 1130 && qwerty.getX() <= 1385 && qwerty.getY() >= 245 && qwerty.getY() <= 600) {
-                my_timer.stop();
+
                 timerbath.stop();
-                timer_death1.stop();
+                GameManager.stopAllTimers();
                 new osn1();
                 dispose();
 
@@ -234,9 +171,7 @@ class Bath_room1 extends JFrame {
             {
                 try {
                     Rooms.room_next(n);
-                    my_timer.stop();
                     timerbath.stop();
-                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -248,9 +183,7 @@ class Bath_room1 extends JFrame {
                 n=true;
                 try {
                     Rooms.room_next(n);
-                    my_timer.stop();
                     timerbath.stop();
-                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -277,22 +210,5 @@ class Bath_room1 extends JFrame {
 
         }
     };
-    ActionListener al3 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (Needs.res(sleepNeeds,showerNeeds,foodNeeds,gameNeeds,"sleep_death.txt","shower_death.txt","food_death.txt", "game_death.txt")) {
-                try {
-                    new Death();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                timerbath.stop();
-                my_timer.stop();
-                timer_death1.stop();
-                dispose();
-            }
 
-        }
-    };
-    Timer timer_death1  = new Timer(10000/2,al3);
 }

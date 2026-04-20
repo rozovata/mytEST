@@ -89,7 +89,7 @@ public class Needs {
         updateImage();
     }
 
-    // Добавляем метод для получения пути к текущему изображению
+    // путь к изображению
     public String getCurrentImagePath() {
         if (images != null && counter >= 0 && counter < images.length) {
             return images[counter];
@@ -124,7 +124,7 @@ public class Needs {
     {
         boolean y = false;
         int death = Needs.CounterFromFile2(file);
-        if (death<6) {
+        if (death<4) {
             if (need.Death1())
                 death++;
             else

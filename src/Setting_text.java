@@ -9,9 +9,6 @@ import java.time.LocalDateTime;
 class Setting_text extends JFrame {
 
 
-    public static void main(String[] args) throws IOException {
-        Setting_text Setting_text = new Setting_text();
-    }
     character setting_text = new character("src/image/setting_text.png",0,0);
 
 
@@ -40,6 +37,8 @@ class Setting_text extends JFrame {
             try {
                 new Menu();
             } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             dispose();

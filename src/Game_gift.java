@@ -8,68 +8,11 @@ import java.util.Random;
 
 class Game_gift extends JFrame {
 
-
-    public static void main(String[] args) throws IOException {
-        Game_gift game = new Game_gift();
-    }
+    Needs gameNeeds = GameManager.getGameNeeds();
 
 
-    // Инициализируем
-    String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
 
-    String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    String [] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    String [] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-
-
-    Needs sleepNeeds = new Needs("test.txt", sleepImages);
-    Needs showerNeeds = new Needs("test2.txt", showerImages);
-    Needs foodNeeds = new Needs("test1.txt", foodImages );
-    Needs gameNeeds = new Needs("test3.txt", gameImages );
-
-  /*  ActionListener al = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            try {
-                // Обновляем картинки в объектах
-                sleepNeeds.next();
-                showerNeeds.next();
-                foodNeeds.next();
-                gameNeeds.next();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            repaint();
-        }
-    };
-
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener*/
     character fon = new character("src/image/fon_gift_game.png", 0, 0);
-    // character gf = new character("src/image/gift.png", 0, 0);
     Player gift = new Player(1920/2-70,0,"src/image/gift.png");
     character platform = new character("src/image/platform1.png",1920/2-150,800);
 
@@ -105,7 +48,6 @@ class Game_gift extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
-        //my_timer.start();
         block_timer.start();
         timer.start();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,10 +104,16 @@ class Game_gift extends JFrame {
                     count++;
                 }
                 else{
-                    //my_timer.stop();
                     block_timer.stop();
                     timer.stop();
                     try {
+                        gameNeeds.updateImage();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        GameManager.refreshImage();
+                        GameManager.startGlobalTimers();
                         new Game_room();
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);

@@ -11,67 +11,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Menu extends JFrame {
-    // Инициализируем
-    static String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
 
-    static String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    static String[] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    static String[] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-    static Needs sleepNeeds;
-    static Needs showerNeeds;
-    static Needs foodNeeds;
-    static Needs gameNeeds;
+    Needs sleepNeeds;
+    Needs showerNeeds;
+    Needs foodNeeds;
+    Needs gameNeeds;
 
-    static {
-        try {
-            sleepNeeds = new Needs("test.txt", sleepImages);
-            showerNeeds = new Needs("test2.txt", showerImages);
-            foodNeeds = new Needs("test1.txt", foodImages);
-            gameNeeds = new Needs("test3.txt", gameImages);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    KeyListener KL = new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-    };
     MouseListener ML = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent qwerty) {
@@ -119,21 +64,27 @@ public class Menu extends JFrame {
     };
 
 
-    Menu() throws FileNotFoundException {
+    Menu() throws IOException {
+        // Инициализируем GameManager (один раз)
+        GameManager.init();
+        sleepNeeds = GameManager.getSleepNeeds();
+        showerNeeds = GameManager.getShowerNeeds();
+        foodNeeds = GameManager.getFoodNeeds();
+        gameNeeds = GameManager.getGameNeeds();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setSize(2000, 1000);
         setVisible(true);
-        addKeyListener(KL);
+
         addMouseListener(ML);
 
         fiile();
 
-        int t1 = Time.NeedsTime(sleepNeeds);
-        int t2 = Time.NeedsTime(showerNeeds);
-        int t3 = Time.NeedsTime(gameNeeds);
-        int t4 = Time.NeedsTime(foodNeeds);
+        int t1 = Time.NeedsTime(GameManager.getSleepNeeds());
+        int t2 = Time.NeedsTime(GameManager.getShowerNeeds());
+        int t3 = Time.NeedsTime(GameManager.getGameNeeds());
+        int t4 = Time.NeedsTime(GameManager.getFoodNeeds());
 
 
         try {
@@ -170,7 +121,7 @@ public class Menu extends JFrame {
     }
 
     //"C:TATIANA/Users/Tom/IdeaProjects/my_game/5438484227139173417.jpg"
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         Menu w = new Menu();
 
     }

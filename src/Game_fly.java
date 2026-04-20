@@ -9,66 +9,8 @@ import java.util.Random;
 class Game_fly extends JFrame {
 
 
-    public static void main(String[] args) throws IOException {
+    Needs gameNeeds = GameManager.getGameNeeds();
 
-        Game_fly game = new Game_fly();
-    }
-
-
-    // Инициализируем
-    String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
-
-    String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    String [] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    String [] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-
-
-    Needs sleepNeeds = new Needs("test.txt", sleepImages);
-    Needs showerNeeds = new Needs("test2.txt", showerImages);
-    Needs foodNeeds = new Needs("test1.txt", foodImages );
-    Needs gameNeeds = new Needs("test3.txt", gameImages );
-
-    /* ActionListener al = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            try {
-                // Обновляем картинки в объектах
-                sleepNeeds.next();
-                showerNeeds.next();
-                foodNeeds.next();
-                gameNeeds.next();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            repaint();
-        }
-    };
-
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener*/
     character fon = new character("src/image/fon_fly.png", 0, 0);
     bear Bear = new bear("src/image/bear_fly.png",
             "src/image/void.png",
@@ -124,33 +66,16 @@ class Game_fly extends JFrame {
         addKeyListener(KL);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), 2);
-        //my_timer.start();
         block_timer.start();
         timer.start();
+        GameManager.setCurrentRoom(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     BufferedImage  bi;
     public void paint(Graphics g)
     {
-        // Отрисовка рамок
-        Graphics2D g2d = (Graphics2D) g;
 
-
-       /* g2d.setColor(Color.RED);
-        g2d.drawRect(player.x , player.y ,
-                player.image.getWidth() - 10, player.image.getHeight() - 10);
-
-        g2d.setColor(Color.BLUE);
-        g2d.drawRect(blocks_1.x , blocks_1.y1,
-                blocks_1.image1.getWidth() - 10, blocks_1.image1.getHeight() - 10);
-        g2d.drawRect(blocks_1.x , blocks_1.y2 ,
-                blocks_1.image2.getWidth() - 10, blocks_1.image2.getHeight() - 10);
-        g2d.drawRect(blocks_1.x , blocks_1.y3,
-                blocks_1.image3.getWidth() - 10, blocks_1.image3.getHeight() - 10);
-        if (bi == null) {
-            bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        }*/
         Graphics2D test = bi.createGraphics();
         if (fon._image != null) test.drawImage(fon._image, fon.x, fon.y, this);
         if (Bear._image != null) test.drawImage(Bear._image, Bear.x, Bear.y, this);
@@ -209,10 +134,16 @@ class Game_fly extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    //my_timer.stop();
                     block_timer.stop();
                     timer.stop();
                     try {
+                        gameNeeds.updateImage();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        GameManager.refreshImage();
+                        GameManager.startGlobalTimers();
                         new Game_room();
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);

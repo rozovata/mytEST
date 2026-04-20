@@ -8,44 +8,6 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 class Living_room1 extends JFrame {
 
-
-    public static void main(String[] args) throws IOException {
-
-        Living_room1 game = new Living_room1();
-
-    }
-    // Инициализируем
-    static String[] sleepImages = {
-            "src/image/sleep1.png",
-            "src/image/sleep2.png",
-            "src/image/sleep3.png",
-            "src/image/sleep4.png",
-            "src/image/sleep5.png"
-    };
-
-    static String[] showerImages = {
-            "src/image/shower1.png",
-            "src/image/shower2.png",
-            "src/image/shower3.png",
-            "src/image/shower4.png",
-            "src/image/shower5.png"
-    };
-    static String [] foodImages = {
-            "src/image/food1.png",
-            "src/image/food2.png",
-            "src/image/food3.png",
-            "src/image/food4.png",
-            "src/image/food5.png"
-    };
-    static String [] gameImages = {
-            "src/image/game1.png",
-            "src/image/game2.png",
-            "src/image/game3.png",
-            "src/image/game4.png",
-            "src/image/game5.png"
-    };
-
-
     Needs sleepNeeds;
     Needs showerNeeds;
     Needs foodNeeds;
@@ -57,28 +19,10 @@ class Living_room1 extends JFrame {
     Game game;
     botton arrow_room_right = new botton("src/image/arrow_room_right.png");
     botton arrow_room_left = new botton("src/image/arrow_room_left.png");
-
-    ActionListener al = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            try {
-                // Обновляем картинки в объектах
-                sleepNeeds.next();
-                showerNeeds.next();
-                foodNeeds.next();
-                gameNeeds.next();
-                sleep._image = sleepNeeds.image;
-                shower._image = showerNeeds.image;
-                food._image = foodNeeds.image;
-                game._image = gameNeeds.image;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            repaint();
-        }
-    };
-    Timer my_timer = new Timer(10000,al); //таймер через 10 секунд совершает действия в actionlistener
+    character exit = new character("src/image/exit..png", 0, 0);
+    Timer timerBad;
+    character fon = new character("src/image/Bad_room.png", 0, 0);
+    bear Bear;
 
      int bad=0;
     ActionListener al1 = new ActionListener() {
@@ -133,42 +77,41 @@ class Living_room1 extends JFrame {
 
         }
     };
-    character exit = new character("src/image/exit..png", 0, 0);
-    Timer timerBad = new Timer(1000,al1);
-    character fon = new character("src/image/Bad_room.png", 0, 0);
-    bear Bear = new bear("src/image/bear.png",
-            bear.head(),
-            bear.top(),
-            bear.trousers(),
-            bear.boots(),
-            0, 0);
-
-
 
 
     Living_room1() throws IOException {
-        sleepNeeds = new Needs("test.txt", sleepImages);
-        showerNeeds = new Needs("test2.txt", showerImages);
-        foodNeeds = new Needs("test1.txt", foodImages );
-        gameNeeds = new Needs("test3.txt", gameImages );
 
+        // Берём потребности из GameManager
+        sleepNeeds = GameManager.getSleepNeeds();
+        showerNeeds = GameManager.getShowerNeeds();
+        foodNeeds = GameManager.getFoodNeeds();
+        gameNeeds = GameManager.getGameNeeds();
 
-        sleep = new Sleep(sleepNeeds.getCurrentImagePath(),0,0);
-        shower = new Shower(showerNeeds.getCurrentImagePath(),0,0);
-        food = new Food(foodNeeds.getCurrentImagePath(),0,0);
-        game = new Game(gameNeeds.getCurrentImagePath(),0,0);
+        // Создаём объекты с картинками
+        sleep = new Sleep(sleepNeeds.getCurrentImagePath(), 0, 0);
+        shower = new Shower(showerNeeds.getCurrentImagePath(), 0, 0);
+        food = new Food(foodNeeds.getCurrentImagePath(), 0, 0);
+        game = new Game(gameNeeds.getCurrentImagePath(), 0, 0);
 
         sleep._image = sleepNeeds.image;
         shower._image = showerNeeds.image;
         food._image = foodNeeds.image;
         game._image = gameNeeds.image;
 
-        setSize(1920,1080);
+        Bear = new bear("src/image/bear.png",
+                bear.head(), bear.top(), bear.trousers(), bear.boots(), 0, 0);
+
+        timerBad = new Timer(1000, al1);
+
+        setSize(1920, 1080);
         setVisible(true);
         addMouseListener(ML);
-        bi = new BufferedImage(getWidth(), getHeight(), 2);
-        my_timer.start();
-        timer_death1.start();
+        bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        GameManager.setCurrentRoom(this);
+        GameManager.refreshImage();
+        // Запускаем глобальные таймеры (один раз)
+        GameManager.startGlobalTimers();
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -206,8 +149,8 @@ class Living_room1 extends JFrame {
         public void mouseClicked(MouseEvent qwerty) {
             if (qwerty.getX() >= 1755 && qwerty.getX()<= 1920 && qwerty.getY() >= 0 && qwerty.getY()<= 167 )
             {
+                GameManager.stopAllTimers();
                 exit();
-
             }
             if (qwerty.getX() >= 900 && qwerty.getX() <= 1700 && qwerty.getY() >= 412 && qwerty.getY() <= 840) {
                 bad += 1;
@@ -225,8 +168,6 @@ class Living_room1 extends JFrame {
                 try {
                     Rooms.room_next(n);
                     timerBad.stop();
-                    my_timer.stop();
-                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -239,8 +180,6 @@ class Living_room1 extends JFrame {
                 try {
                     Rooms.room_next(n);
                     timerBad.stop();
-                    my_timer.stop();
-                    timer_death1.stop();
                     Rooms.class_room();
                     dispose();
                 } catch (IOException e) {
@@ -270,24 +209,6 @@ class Living_room1 extends JFrame {
         }
     };
 
-    ActionListener al3 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (Needs.res(sleepNeeds,showerNeeds,foodNeeds,gameNeeds,"sleep_death.txt","shower_death.txt","food_death.txt", "game_death.txt")) {
-                try {
-                    new Death();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                timerBad.stop();
-                my_timer.stop();
-                timer_death1.stop();
-                dispose();
-            }
-
-        }
-    };
-    Timer timer_death1  = new Timer(10000/2,al3);
     public static void exit()
     {
         try {
@@ -303,35 +224,6 @@ class Living_room1 extends JFrame {
         System.exit(0);
     }
 
-
-/* public static int death=0;
-
-    ActionListener al2 = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ee) {
-            if (death<1) {
-                if (Needs.Death2(sleepNeeds, showerNeeds, foodNeeds, gameNeeds))
-                    death += 1;
-                else
-                    death = 0;
-            }
-            else
-            {
-                death = 0;
-                try {
-                    new Death();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                timerBad.stop();
-                my_timer.stop();
-                timer_death.stop();
-                dispose();
-            }
-        }
-    };
-    Timer timer_death  = new Timer(10000,al2);
-*/
 }
 
 

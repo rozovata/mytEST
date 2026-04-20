@@ -208,6 +208,7 @@ class osn1 extends JFrame implements KeyListener {
                 if(qwerty.getX() >= 54 && qwerty.getX()<= 304 && qwerty.getY() >= 389 && qwerty.getY()<= 637 )
             {
                 try {
+                    GameManager.startGlobalTimers();
                     new Bath_room1();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
