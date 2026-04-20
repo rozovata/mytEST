@@ -98,6 +98,9 @@ class Living_room1 extends JFrame {
         food._image = foodNeeds.image;
         game._image = gameNeeds.image;
 
+        GameManager.setCurrentRoom(this);
+        GameManager.refreshImage();
+
         Bear = new bear("src/image/bear.png",
                 bear.head(), bear.top(), bear.trousers(), bear.boots(), 0, 0);
 
@@ -107,8 +110,7 @@ class Living_room1 extends JFrame {
         setVisible(true);
         addMouseListener(ML);
         bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        GameManager.setCurrentRoom(this);
-        GameManager.refreshImage();
+
         // Запускаем глобальные таймеры (один раз)
         GameManager.startGlobalTimers();
 
