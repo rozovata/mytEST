@@ -86,7 +86,10 @@ class Living_room1 extends JFrame {
         showerNeeds = GameManager.getShowerNeeds();
         foodNeeds = GameManager.getFoodNeeds();
         gameNeeds = GameManager.getGameNeeds();
-
+        sleepNeeds.updateImage();
+        showerNeeds.updateImage();
+        foodNeeds.updateImage();
+        gameNeeds.updateImage();
         // Создаём объекты с картинками
         sleep = new Sleep(sleepNeeds.getCurrentImagePath(), 0, 0);
         shower = new Shower(showerNeeds.getCurrentImagePath(), 0, 0);
@@ -97,9 +100,9 @@ class Living_room1 extends JFrame {
         shower._image = showerNeeds.image;
         food._image = foodNeeds.image;
         game._image = gameNeeds.image;
-
         GameManager.setCurrentRoom(this);
         GameManager.refreshImage();
+
 
         Bear = new bear("src/image/bear.png",
                 bear.head(), bear.top(), bear.trousers(), bear.boots(), 0, 0);

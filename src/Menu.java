@@ -65,12 +65,7 @@ public class Menu extends JFrame {
 
 
     Menu() throws IOException {
-        // Инициализируем GameManager (один раз)
-        GameManager.init();
-        sleepNeeds = GameManager.getSleepNeeds();
-        showerNeeds = GameManager.getShowerNeeds();
-        foodNeeds = GameManager.getFoodNeeds();
-        gameNeeds = GameManager.getGameNeeds();
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -80,6 +75,12 @@ public class Menu extends JFrame {
         addMouseListener(ML);
 
         fiile();
+        // Инициализируем GameManager (один раз)
+        GameManager.init();
+        sleepNeeds = GameManager.getSleepNeeds();
+        showerNeeds = GameManager.getShowerNeeds();
+        foodNeeds = GameManager.getFoodNeeds();
+        gameNeeds = GameManager.getGameNeeds();
 
         int t1 = Time.NeedsTime(GameManager.getSleepNeeds());
         int t2 = Time.NeedsTime(GameManager.getShowerNeeds());
